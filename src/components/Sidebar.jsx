@@ -26,11 +26,19 @@ function Sidebar(prop) {
             Dashboard
           </Link>
         </li>
+
         <li>
-          <Link to="/" className="nav-link text-white">
-            Orders
-          </Link>
+          <button
+            name="AddBtn"
+            className="nav-link text-white"
+            onClick={() => {
+              prop.optionSelector(2);
+            }}
+          >
+            Add Expenses
+          </button>
         </li>
+
         <li>
           <Link to="/" className="nav-link text-white">
             Products
