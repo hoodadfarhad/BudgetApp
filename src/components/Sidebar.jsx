@@ -22,14 +22,18 @@ function Sidebar(prop) {
         </li>
 
         <li>
-          <Link to="/" className="nav-link text-white">
+          <button
+            className="nav-link text-white"
+            onClick={() => {
+              prop.optionSelector(1);
+            }}
+          >
             Dashboard
-          </Link>
+          </button>
         </li>
 
         <li>
           <button
-            name="AddBtn"
             className="nav-link text-white"
             onClick={() => {
               prop.optionSelector(2);

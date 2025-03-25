@@ -7,10 +7,14 @@ import Expenses from "./AddExp";
 import { Link } from "react-router-dom";
 
 function StartingPage(prop) {
-  const [clickedOption, setClickedOption] = useState(0);
+  const [clickedOption, setClickedOption] = useState(1);
 
   function SideBarResult(id) {
     switch (id) {
+      case 1:
+        setClickedOption(1);
+        break;
+
       case 2:
         setClickedOption(2);
         break;
@@ -21,13 +25,28 @@ function StartingPage(prop) {
     }
   }
 
+  function WhatToRender(op) {
+    switch (op) {
+      case 1:
+        return <Dashboard />;
+        break;
+      case 2:
+        return <Expenses />;
+        break;
+
+      default:
+        return <Dashboard />;
+        break;
+    }
+  }
+
   return (
     <div className="App">
       <Header />
 
       <div className="mainPage">
         <Sidebar optionSelector={SideBarResult} />
-        {clickedOption === 2 ? <Expenses /> : <Dashboard />}
+        {WhatToRender(clickedOption)}
       </div>
     </div>
   );
