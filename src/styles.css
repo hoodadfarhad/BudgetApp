@@ -1,0 +1,46 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+  height: 100vh;
+  overflow: hidden;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+
+  background-color: bisque;
+}
+
+.header {
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.sidebar {
+  width: 100%;
+  height: 100%;
+}
+
+.dashBoard {
+  width: 100%;
+  height: 100%;
+  background-color: brown;
+}
+
+.mainPage {
+  border: 2px black solid;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  grid-template-rows: 1fr;
+  height: 100%;
+  width: 100vw;
+  overflow: hidden;
+}
