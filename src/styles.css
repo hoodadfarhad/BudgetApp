@@ -44,3 +44,32 @@ body {
   width: 100vw;
   overflow: hidden;
 }
+
+.link-body-emphasis:hover {
+  /* background-color: #0d6efd; */
+  color: white !important;
+  font-weight: bold;
+}
+
+.allAcc {
+  height: 100%;
+  width: 100%;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.newCardInput {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  border: 3px black solid;
+}
+
+.form-width {
+  width: 50%;
+}

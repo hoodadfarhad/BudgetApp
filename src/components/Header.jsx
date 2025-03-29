@@ -13,7 +13,7 @@ function Header(prop) {
                   Dashboard
                 </Link>
                 <div className="navbar-nav">
-                  <Link to="/" className="nav-link">
+                  <Link to="/about" className="nav-link">
                     About
                   </Link>
                   <Link to="/about" className="nav-link">

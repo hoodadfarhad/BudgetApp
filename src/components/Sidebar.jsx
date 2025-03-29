@@ -1,4 +1,5 @@
 import React from "react";
+import Cards from "./Cards";
 import { Link } from "react-router-dom";
 
 function Sidebar(prop) {
@@ -8,17 +9,22 @@ function Sidebar(prop) {
       style={{ width: "280px" }}
     >
       <Link
-        to="/hey"
+        to="/"
         className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
       >
         <span className="fs-4">Sidebar</span>
       </Link>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li className="nav-item">
-          <Link to="/hey" className="nav-link active" aria-current="page">
-            Home
-          </Link>
+        <li class="mb-1">
+          <button
+            class="nav-link text-white btn-toggle rounded border-0 collapsed"
+            onClick={() => {
+              prop.optionSelector(0);
+            }}
+          >
+            Accounts
+          </button>
         </li>
 
         <li>
@@ -28,30 +34,27 @@ function Sidebar(prop) {
               prop.optionSelector(1);
             }}
           >
-            Dashboard
-          </button>
-        </li>
-
-        <li>
-          <button
-            className="nav-link text-white"
-            onClick={() => {
-              prop.optionSelector(2);
-            }}
-          >
             Add Expenses
           </button>
         </li>
 
-        <li>
-          <Link to="/" className="nav-link text-white">
-            Products
-          </Link>
-        </li>
-        <li>
-          <Link to="/" className="nav-link text-white">
-            Customers
-          </Link>
+        <li class="mb-1">
+          <button
+            class="nav-link text-white btn-toggle rounded border-0 collapsed"
+            data-bs-toggle="collapse"
+            data-bs-target="#home-collapse"
+            aria-expanded="false"
+            onClick={() => {
+              prop.optionSelector(2);
+            }}
+          >
+            Add/Modify
+          </button>
+          <div class="collapse" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <Cards cardSelector={prop.optionSelector} />
+            </ul>
+          </div>
         </li>
       </ul>
       <hr />
