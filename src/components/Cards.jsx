@@ -40,5 +40,5 @@ function Cards(prop) {
     </div>
   );
 }
-
+export { cardArr };
 export default Cards;

@@ -73,3 +73,35 @@ body {
 .form-width {
   width: 50%;
 }
+
+.switchStack {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.addTransaction {
+  width: 50%;
+  height: 60%;
+  margin-left: 22%;
+  margin-top: 8%;
+  border: 20px black solid;
+}
+
+.rowMargin {
+  margin: 20px 0px 40px 0px;
+}
+
+.switchStack .form-check-input {
+  transform: scale(2.5);
+  margin-left: 40px;
+}
+
+.modalPadding {
+  padding: 50px 50px 50px 50px;
+}
+
+.length {
+  width: 60%;
+}

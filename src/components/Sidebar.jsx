@@ -44,9 +44,9 @@ function Sidebar(prop) {
             data-bs-toggle="collapse"
             data-bs-target="#home-collapse"
             aria-expanded="false"
-            onClick={() => {
-              prop.optionSelector(2);
-            }}
+            // onClick={() => {
+            //   prop.optionSelector(2);
+            // }}
           >
             Add/Modify
           </button>
