@@ -9,7 +9,7 @@ function NewCardPanel(prop) {
             Account Name:
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleFormControlInput1"
             placeholder="Example: Saving"
@@ -19,7 +19,7 @@ function NewCardPanel(prop) {
             Bank Name:
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleFormControlInput1"
             placeholder="Example: TD"
@@ -29,7 +29,7 @@ function NewCardPanel(prop) {
             Balance:
           </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
             id="exampleFormControlInput1"
             placeholder="Example: 1000.00"

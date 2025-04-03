@@ -23,7 +23,7 @@ function Sidebar(prop) {
               prop.optionSelector(0);
             }}
           >
-            Accounts
+            Overview
           </button>
         </li>
 
@@ -48,7 +48,7 @@ function Sidebar(prop) {
             //   prop.optionSelector(2);
             // }}
           >
-            Add/Modify
+            Accounts
           </button>
           <div class="collapse" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">

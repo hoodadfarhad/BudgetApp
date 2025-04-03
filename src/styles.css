@@ -55,10 +55,9 @@ body {
   height: 100%;
   width: 100%;
   background-color: aliceblue;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 2fr 3fr;
 }
 
 .newCardInput {
@@ -104,4 +103,11 @@ body {
 
 .length {
   width: 60%;
+}
+
+.fullRow {
+  grid-column: span 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  background-color: blueviolet;
 }

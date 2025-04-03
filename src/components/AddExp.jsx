@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { cardArr } from "./Cards";
 import { Link } from "react-router-dom";
 import DropDown from "./DropDown";
+import CategoryModal from "./CategoryModal";
 
 function Expenses(prop) {
   const [category, setCategory] = useState([
@@ -18,24 +19,6 @@ function Expenses(prop) {
   const [isIncome, setIsIncome] = useState(false);
   const [date, setDate] = useState("");
   const [showModal, setShowModal] = useState(false);
-  const [newCategory, setNewCategory] = useState("");
-  const [rmvCategory, setRmvCategory] = useState("");
-
-  function handleAddCategory() {
-    if (newCategory.trim() !== "") {
-      setCategory((prev) => [...prev, newCategory]);
-      setNewCategory("");
-    }
-  }
-
-  function handleRmvCategory(selectedItem) {
-    setCategory((prev) =>
-      prev.filter((cat) => {
-        return cat !== selectedItem;
-      })
-    );
-    setRmvCategory("");
-  }
 
   function clickedIncome() {
     setIsIncome((ghablia) => {
@@ -53,14 +36,8 @@ function Expenses(prop) {
     if (currentMonth == month) {
       setDate(date);
     } else {
-      if (
-        (currentMonth - month == 1 || currentMonth - month == -11) &&
-        currentDay <= 10
-      ) {
-        setDate(date);
-      } else {
-        alert("is does not belong to current month");
-      }
+      alert("Be advised that this does not belong to this month");
+      setDate(date);
     }
   }
 
@@ -76,67 +53,12 @@ function Expenses(prop) {
   return (
     <div className="addTransaction">
       {showModal ? (
-        <div
-          class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5"
-          tabindex="-1"
-          role="dialog"
-          id="modalSheet"
-        >
-          <div class="modal-dialog " role="document">
-            <div class="modal-content rounded-4 shadow modalPadding">
-              <div class="modal-header border-bottom-0 position-relative">
-                <h1 class="modal-title fs-5 text-center w-100">
-                  Customize Categories
-                </h1>
-                <button
-                  type="button"
-                  class="btn-close position-absolute end-0 top-50 translate-middle-y"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                  onClick={() => {
-                    setShowModal(false);
-                  }}
-                ></button>
-              </div>
-
-              {category.map((item) => {
-                return (
-                  <div class="modal-body py-0 mb-3 switchStack justify-content-between">
-                    <h3>{item}</h3>
-                    <button
-                      type="button"
-                      class="btn btn-lg btn-danger"
-                      onClick={() => handleRmvCategory(item)}
-                    >
-                      Remove
-                    </button>
-                  </div>
-                );
-              })}
-              <div class="modal-body py-0 mb-3 switchStack justify-content-between">
-                <input
-                  type="text"
-                  name="newCategory"
-                  className="form-control length"
-                  placeholder="Add New Category"
-                  onChange={(event) => setNewCategory(event.target.value)}
-                />
-                <button
-                  type="button"
-                  class="btn btn-lg btn-primary"
-                  onClick={() => {
-                    handleAddCategory();
-                  }}
-                >
-                  Add
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      ) : null}
-
-      {showModal ? null : (
+        <CategoryModal
+          setShowModal={setShowModal}
+          setCategory={setCategory}
+          category={category}
+        />
+      ) : (
         <form onSubmit={handleSubmit}>
           <div className="container">
             <div className="row rowMargin justify-content-around">
@@ -245,7 +167,7 @@ Fee amount
                   type="number"
                   className="form-control"
                   id="exampleFormControlInput1"
-                  placeholder="$Price Amount"
+                  placeholder="$Amount"
                   min="0"
                   max="10000"
                   step="0.01"
