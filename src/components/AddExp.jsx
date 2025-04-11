@@ -19,6 +19,8 @@ function Expenses(prop) {
   const [isIncome, setIsIncome] = useState(false);
   const [date, setDate] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [fee, setFee] = useState("");
+  const [description, setDescription] = useState("");
 
   function clickedIncome() {
     setIsIncome((ghablia) => {
@@ -41,12 +43,34 @@ function Expenses(prop) {
     }
   }
 
-  function handleSubmit(event) {
+  async function handleSubmit(event) {
     event.preventDefault();
 
     if (state.name1 === "Select Account" || !state.name1) {
       alert("Please select an account.");
-      return;
+    } else {
+      const transactionDataToSendBack = {
+        isIncome,
+        account: state.name1,
+        category: state.name2,
+        date,
+        fee,
+        description,
+      };
+
+      const res = await fetch("http://localhost:3000/api/newTransaction", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(transactionDataToSendBack),
+      });
+
+      console.log(await res.json());
+      if (res.ok) {
+        const result = await res.json();
+        alert("Transaction submitted!");
+      } else {
+        alert("Something went wrong.");
+      }
     }
   }
 
@@ -80,7 +104,7 @@ toggle-lable stack
                   type="checkbox"
                   role="switch"
                   id="flexSwitchCheckChecked"
-                  checked={isIncome}
+                  value={isIncome}
                   onChange={clickedIncome}
                 />
               </div>
@@ -171,6 +195,8 @@ Fee amount
                   min="0"
                   max="10000"
                   step="0.01"
+                  value={fee}
+                  onChange={(e) => setFee(e.target.value)}
                   required
                 />
               </div>
@@ -205,6 +231,10 @@ Transaction Description
                   className="form-control"
                   id="exampleFormControlTextarea1"
                   rows="3"
+                  value={description}
+                  onChange={(e) => {
+                    setDescription(e.target.value);
+                  }}
                   placeholder="Description..."
                 ></textarea>
               </div>
