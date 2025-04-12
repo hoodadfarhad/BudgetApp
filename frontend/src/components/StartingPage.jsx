@@ -10,6 +10,7 @@ import { Link } from "react-router-dom";
 
 function StartingPage(prop) {
   const [clickedOption, setClickedOption] = useState(0);
+ 
 
   function SideBarResult(id) {
     switch (id) {

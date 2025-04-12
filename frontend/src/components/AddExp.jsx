@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect,useState } from "react";
 import { cardArr } from "./Cards";
 import { Link } from "react-router-dom";
 import DropDown from "./DropDown";
 import CategoryModal from "./CategoryModal";
+import useUserStore from './useUserStore'; // using Zustand here - global state access
 
 function Expenses(prop) {
   const [category, setCategory] = useState([
-    "housing",
-    "grocery",
-    "bills",
-    "entertainment",
   ]);
+
+
+  useEffect(() => {
+    categoryGetter();
+  }, []);
+
 
   const [state, setState] = useState({
     name1: "Select Account",
@@ -21,6 +24,10 @@ function Expenses(prop) {
   const [showModal, setShowModal] = useState(false);
   const [fee, setFee] = useState("");
   const [description, setDescription] = useState("");
+  const { userID, setUserID } = useUserStore();
+
+
+  
 
   function clickedIncome() {
     setIsIncome((ghablia) => {
@@ -53,6 +60,14 @@ function Expenses(prop) {
     
   }
 
+ async function categoryGetter(params) {
+  const res = await fetch("http://localhost:5001/api/getCategories");
+  const resultCat = await res.json();
+  setCategory(resultCat.map(cat => cat.name));
+  console.log(resultCat); 
+  return resultCat;
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -66,8 +81,9 @@ function Expenses(prop) {
         date,
         fee,
         description,
+        userID
       };
-
+      console.log("🧾 Sending userID:", userID);
       const res = await fetch("http://localhost:5001/api/newTransaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -85,6 +101,8 @@ function Expenses(prop) {
 
     stateReset();
   }
+
+
 
   return (
     <div className="addTransaction">

@@ -1,23 +1,60 @@
 import React, { useState } from "react";
+import useUserStore from './useUserStore'; // using Zustand here - global state access
 
 function CategoryModal(prop) {
   const [newCategory, setNewCategory] = useState("");
   const [rmvCategory, setRmvCategory] = useState("");
+  const { userID, setUserID } = useUserStore();
 
-  function handleAddCategory() {
+
+  
+
+ async function handleAddCategory() {
     if (newCategory.trim() !== "") {
-      prop.setCategory((prev) => [...prev, newCategory]);
+
+      const res = await fetch("http://localhost:5001/api/addCategory", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name: newCategory.trim(), id: userID })
+      });
+      const result = await res.json();
+      console.log(result);
+      if (res.ok) {
+        
+        alert("new category added!");
+      } else {
+        alert("Something went wrong with adding new category.");
+      }
+
+      prop.setCategory((prev) => [...prev, newCategory.trim()]);
+      // also add the new category to db
       setNewCategory("");
     }
   }
 
-  function handleRmvCategory(selectedItem) {
+async  function handleRmvCategory(selectedItem) {
+
+
+    const res = await fetch("http://localhost:5001/api/rmvCategory", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name: selectedItem })
+    });
+    const result = await res.json();
+    console.log(result);
+    if (res.ok) {
+      
+      alert(" category deleted!");
+    } else {
+      alert("Something went wrong with deleting the category.");
+    }
+
     prop.setCategory((prev) =>
       prev.filter((cat) => {
         return cat !== selectedItem;
       })
     );
-    setRmvCategory("");
+    // setRmvCategory("");
   }
 
   return (
