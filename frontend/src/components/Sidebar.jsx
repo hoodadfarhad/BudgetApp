@@ -16,7 +16,7 @@ function Sidebar(prop) {
       </Link>
       <hr />
       <ul className="nav nav-pills flex-column mb-auto">
-        <li class="mb-1">
+        <li className="mb-1">
           <button
             class="nav-link text-white btn-toggle rounded border-0 collapsed"
             onClick={() => {

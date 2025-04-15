@@ -1,4 +1,6 @@
 import React from "react";
+import useAccountStore from './useAccountsStore';
+
 
 function ExistingCard(prop) {
   return (
@@ -9,7 +11,7 @@ function ExistingCard(prop) {
           prop.cardsSelector(4);
         }}
       >
-        {prop.bank + " " + prop.name}
+        {prop.name}
       </a>
     </li>
   );
