@@ -15,7 +15,7 @@ function CategoryModal(prop) {
       const res = await fetch("http://localhost:5001/api/addCategory", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: newCategory.trim(), id: userID })
+        body: JSON.stringify({ name: newCategory.trim(), owner_id: userID })
       });
       const result = await res.json();
       console.log(result);
@@ -38,7 +38,7 @@ async  function handleRmvCategory(selectedItem) {
     const res = await fetch("http://localhost:5001/api/rmvCategory", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name: selectedItem })
+      body: JSON.stringify({ name: selectedItem, owner_id: userID })
     });
     const result = await res.json();
     console.log(result);

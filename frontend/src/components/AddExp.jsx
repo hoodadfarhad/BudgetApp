@@ -1,14 +1,18 @@
 import React, { useEffect,useState } from "react";
-import { cardArr } from "./Cards";
+
 import { Link } from "react-router-dom";
 import DropDown from "./DropDown";
 import CategoryModal from "./CategoryModal";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
+import useAccountStore from './useAccountsStore';
+
+
+ 
 
 function Expenses(prop) {
   const [category, setCategory] = useState([
   ]);
-
+  const { cardArr } = useAccountStore();
 
   useEffect(() => {
     categoryGetter();
@@ -159,7 +163,7 @@ Drop Down for Accounts
                   {cardArr.map((item, index) => {
                     return (
                       <DropDown
-                        items={item.bankName + " " + item.accountName}
+                        items={item}
                         key={index}
                         setFace={setState}
                         name="name1"

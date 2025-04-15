@@ -24,8 +24,33 @@ const db = new pg.Client({
 db.connect();
 
 
-app.get('/', (req, res) => {
-    res.json({ message: 'Test route working!' });
+
+
+
+
+  app.post('/api/accountsGetter', async (req, res) => {
+
+    const existingAccounts = await db.query(
+      `SELECT name FROM accounts WHERE owner_id=$1`,
+      [req.body.owner_id]
+    );
+    
+    res.json({ existingAccounts: existingAccounts.rows });
+  });
+
+  app.post('/api/newAccountInfo', async (req, res) => {
+  
+    
+  
+
+    const resultAddingAccount = await db.query(
+      `INSERT INTO accounts (name, owner_id, balance)
+       VALUES ($1,$2, $3)`,
+      [req.body.info.bank + " " + req.body.info.name , req.body.owner_id, req.body.info.balance]
+    );
+
+
+    res.status(201).json({ message: "account added!", resultAddingAccount: resultAddingAccount.rows[0] });
   });
 
   app.get('/api/getCategories', async (req, res) => {
@@ -74,7 +99,7 @@ app.post('/api/newTransaction', async (req, res) => {
     const resultAddingCat = await db.query(
       `INSERT INTO categories (name, owner_id)
        VALUES ($1,$2)`,
-      [req.body.name, req.body.id]
+      [req.body.name, req.body.owner_id]
     );
 
 
@@ -89,8 +114,8 @@ app.post('/api/newTransaction', async (req, res) => {
     console.log(req.body.name);
 
     const resultremovingCat = await db.query(
-      `DELETE FROM categories WHERE name = $1`,
-      [req.body.name]
+      `DELETE FROM categories WHERE name = $1 AND owner_id=$2`,
+      [req.body.name, req.body.owner_id]
     );
 
 
