@@ -80,14 +80,14 @@ function Expenses(prop) {
     } else {
       const transactionDataToSendBack = {
         isIncome,
-        account: state.name1,
-        category: state.name2,
+        account: state.name1.trim(),
+        category: state.name2.trim(),
         date,
         fee,
         description,
         userID
       };
-      console.log("🧾 Sending userID:", userID);
+      // console.log(" Sending userID:", userID);
       const res = await fetch("http://localhost:5001/api/newTransaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

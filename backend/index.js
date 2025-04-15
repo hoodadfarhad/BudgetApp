@@ -68,21 +68,32 @@ app.post('/api/newTransaction', async (req, res) => {
     
     console.log(req.body);
 
-    const { isIncome, account, category, date, fee, description, ownerID  } = req.body;
+    const { isIncome, account, category, date, fee, description, userID  } = req.body;
     
     // console.log(description);
     //category,account,
 
     
 
-    const accountID = await db.query(  );
-    const categoryID = await db.query(  );
+    const accountID = await db.query(
+      `SELECT id FROM accounts 
+       WHERE TRIM(LOWER(name))=TRIM(LOWER($1)) AND owner_id = $2`,
+      [account, userID]
+    );
+    console.log(accountID.rows[0].id);
+
+      const categoryID = await db.query('SELECT id FROM categories WHERE owner_id=$1 AND name=$2',
+        [userID, category]
+        );
+        console.log(categoryID.rows[0].id);
+      
+  
 
     const result = await db.query(
       `INSERT INTO transactions (owner_id, amount, is_income, date, account_id, category_id,  description)
        VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
-      [ownerID, amount, isIncome, date, accountID, categoryID, description]
+      [userID, parseFloat(fee), isIncome, date, accountID.rows[0].id, categoryID.rows[0].id, description]
     );
 
 
