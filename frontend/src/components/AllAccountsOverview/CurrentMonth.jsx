@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState , useEffect} from "react";
+
 import {
   BarChart,
   Bar,
@@ -10,21 +11,67 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [{ name: "April", income: 4000, expenses: 3000 }];
 
-function CurrentMonth() {
+
+function CurrentMonth(prop) {
+  
+  const [sums, setSums] = useState({ monthName: "avrill", income: 0, expenses: 0 });
+
+
+useEffect(()=>{
+  console.log(sums);
+  async function historyCalc() {
+    const res = await fetch("http://localhost:5001/api/figureCalc", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: prop.id }),
+    });
+    const calcResult = await res.json();
+
+    
+
+    setSums((prev)=>({
+      ...prev,
+      income: parseFloat(calcResult[1].sum),
+      expenses: parseFloat(calcResult[0].sum),
+    }))
+    // console.log(calcResult);
+    
+    // setHistory(transactionHistory);
+
+    if (res.ok) {
+      console.log("Transactions pulled!");
+    } else {
+      console.log("Something went wrong with pulling transactions.");
+    }
+  }
+ 
+  
+
+
+
+
+  historyCalc();
+  
+},[prop.id])
+  
+useEffect(() => {
+  console.log("Updated sums:", sums);
+}, [sums]);
+  
+
   return (
     <div>
       <h1>Total spend this month</h1>
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
+        <BarChart data={[sums]}>
           <CartesianGrid strokeDasharray="1 1" />
-          <XAxis dataKey="name" />
+          <XAxis dataKey="monthName" />
           <YAxis />
           <Tooltip />
           <Legend />
           <Bar dataKey="income" fill="#82ca9d" />
-          <Bar dataKey="expenses" fill="#ff6961" />
+<Bar dataKey="expenses" fill="#ff6961" />
         </BarChart>
       </ResponsiveContainer>
     </div>

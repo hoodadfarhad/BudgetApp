@@ -17,6 +17,8 @@ const data = [
 ];
 
 function CompareMonths(prop) {
+
+  // prop.id --> instead of Zustand
   return (
     <div className="">
       <h1>compare months</h1>

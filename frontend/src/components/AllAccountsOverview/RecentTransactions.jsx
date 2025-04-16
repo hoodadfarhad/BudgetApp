@@ -5,7 +5,7 @@ function RecentTransactions(prop) {
   return (
     <div className="">
       <h1>Recent Transactions</h1>
-      <TableRecent />
+      <TableRecent id={prop.id} />
     </div>
   );
 }

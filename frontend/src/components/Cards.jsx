@@ -21,7 +21,7 @@ function Cards(prop) {
         
         
         const names = data.existingAccounts.map((item) => item.name);
-        console.log(names);
+        // console.log(names);
 setCardArr(names);
 
 
