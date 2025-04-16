@@ -24,8 +24,37 @@ const db = new pg.Client({
 db.connect();
 
 
+app.post('/api/figureCalc', async (req, res) => {
+
+  const sum = await db.query(
+    `SELECT t.is_income, SUM(t.amount)
+     FROM transactions t
+     WHERE t.owner_id = $1 
+       AND EXTRACT(MONTH FROM t.date) = EXTRACT(MONTH FROM CURRENT_DATE)
+     GROUP BY t.is_income`,
+    [req.body.id]
+  );
+  
+   console.log(sum.rows);
+  
+  res.json(sum.rows);
+});
 
 
+app.post('/api/getAllTransactions', async (req, res) => {
+
+  const history = await db.query(
+    `SELECT t.amount, t.date, t.is_income, t.description, c.name AS category_name
+     FROM transactions t
+     LEFT JOIN categories c ON t.category_id = c.id
+     WHERE t.owner_id = $1 AND c.owner_id = $1
+     ORDER BY date DESC;`,
+    [req.body.id]
+  );
+   console.log(history.rows);
+  
+  res.json(history.rows);
+});
 
 
   app.post('/api/accountsGetter', async (req, res) => {
@@ -58,7 +87,7 @@ db.connect();
     const categories = await db.query(
       `SELECT name FROM categories`
     );
-    console.log(categories.rows);
+    // console.log(categories.rows);
     
     res.json(categories.rows);
   });
@@ -105,7 +134,7 @@ app.post('/api/newTransaction', async (req, res) => {
   app.post('/api/addCategory', async (req, res) => {
     console.log("req for adding cat receiveeed");
     
-    console.log(req.body.name);
+    // console.log(req.body.name);
 
     const resultAddingCat = await db.query(
       `INSERT INTO categories (name, owner_id)

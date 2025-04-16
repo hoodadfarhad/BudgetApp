@@ -68,7 +68,7 @@ function Expenses(prop) {
   const res = await fetch("http://localhost:5001/api/getCategories");
   const resultCat = await res.json();
   setCategory(resultCat.map(cat => cat.name));
-  console.log(resultCat); 
+  // console.log(resultCat); 
   return resultCat;
   }
 
