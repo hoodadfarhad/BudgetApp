@@ -1,5 +1,8 @@
 import React from "react";
 import { useState, useEffect } from "react";
+import "../styles.css"; 
+
+
  
 import "bootstrap-icons/font/bootstrap-icons.css";
 
@@ -7,6 +10,7 @@ function TableRecent(prop) {
   const [range, setRange] = useState({ from: 0, to: 5, pgNumber: 1 });
   const [history, setHistory] = useState([]);
  
+  
 
 
 
@@ -56,32 +60,39 @@ useEffect(() => {
 
   return (
     <div className="table-responsive">
-      <table className="table table-bordered table-striped">
+      <table className="table table-bordered">
         <thead className="table-dark">
           <tr>
-            <th>Number</th>
             <th>Category</th>
             <th>Amount</th>
             <th>Date</th>
-            <th>Description</th>
             <th>Modify</th>
           </tr>
         </thead>
         <tbody>
-          {history.slice(range.from, range.to).map((item, index) => (
-            <tr key={index}>
-              <td>{index+1}</td>
-              <td>{item.category_name}</td>
-              <td>{item.amount}</td>
-              <td>{item.date.slice(0,10)}</td>
-              <td>{item.description}</td>
-              <td>
-                <button>
-                  <i className="bi bi-pencil-square"></i>
-                </button>
-              </td>
-            </tr>
-          ))}
+        {history.slice(range.from, range.to).map((item, index) => {
+  // console.log(item.is_income, typeof item.is_income);
+  return (
+    <tr key={index}>
+      {/* <td>{index + 1}</td> */}
+      <td>{item.category_name}</td>
+      <td style={{
+    backgroundColor:
+      item.is_income === true
+        ? "#d4edda"
+        : "#f8d7da",
+  }}>{item.amount}</td>
+      <td>{item.date.slice(0, 10)}</td>
+      {/* <td>{item.description}</td> */}
+      <td>
+        <button>
+          <i className="bi bi-pencil-square"></i>
+        </button>
+      </td>
+    </tr>
+  );
+})}
+
         </tbody>
       </table>
 

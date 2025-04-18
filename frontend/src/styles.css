@@ -105,9 +105,10 @@ body {
   width: 60%;
 }
 
-.fullRow {
-  grid-column: span 2;
+/* .fullRow {
+  grid-column: span 1;
   grid-column-start: 1;
-  grid-column-end: 3;
+  grid-column-end: 2;
   background-color: blueviolet;
-}
+} */
+
