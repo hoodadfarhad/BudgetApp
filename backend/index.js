@@ -35,9 +35,31 @@ app.post('/api/figureCalc', async (req, res) => {
     [req.body.id]
   );
   
-   console.log(sum.rows);
+  //  console.log(sum.rows);
   
   res.json(sum.rows);
+});
+
+
+
+
+
+app.post('/api/getCatAmount', async (req, res) => {
+
+  // console.log("this got called");
+
+  const PieRecord = await db.query(
+    `SELECT SUM(t.amount), c.name AS category_name
+     FROM transactions t
+     LEFT JOIN categories c ON t.category_id = c.id
+     WHERE t.owner_id = $1 AND c.owner_id = $1 AND t.is_income= false
+      GROUP BY category_name`,
+    [req.body.id]
+  );
+
+  //  console.log(PieRecord.rows);
+  
+  res.json(PieRecord.rows);
 });
 
 
@@ -51,7 +73,8 @@ app.post('/api/getAllTransactions', async (req, res) => {
      ORDER BY date DESC;`,
     [req.body.id]
   );
-   console.log(history.rows);
+
+  //  console.log(history.rows);
   
   res.json(history.rows);
 });
@@ -95,7 +118,7 @@ app.post('/api/getAllTransactions', async (req, res) => {
 app.post('/api/newTransaction', async (req, res) => {
     console.log("reqqq receiveeed");
     
-    console.log(req.body);
+    // console.log(req.body);
 
     const { isIncome, account, category, date, fee, description, userID  } = req.body;
     
@@ -109,12 +132,12 @@ app.post('/api/newTransaction', async (req, res) => {
        WHERE TRIM(LOWER(name))=TRIM(LOWER($1)) AND owner_id = $2`,
       [account, userID]
     );
-    console.log(accountID.rows[0].id);
+    // console.log(accountID.rows[0].id);
 
       const categoryID = await db.query('SELECT id FROM categories WHERE owner_id=$1 AND name=$2',
         [userID, category]
         );
-        console.log(categoryID.rows[0].id);
+        // console.log(categoryID.rows[0].id);
       
   
 
@@ -151,7 +174,7 @@ app.post('/api/newTransaction', async (req, res) => {
   app.post('/api/rmvCategory', async (req, res) => {
     console.log("req for deleting cat receiveeed");
     
-    console.log(req.body.name);
+    // console.log(req.body.name);
 
     const resultremovingCat = await db.query(
       `DELETE FROM categories WHERE name = $1 AND owner_id=$2`,

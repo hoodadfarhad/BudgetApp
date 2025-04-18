@@ -56,14 +56,15 @@ useEffect(()=>{
 },[prop.id])
   
 useEffect(() => {
-  console.log("Updated sums:", sums);
+  // console.log("Updated sums:", sums);
 }, [sums]);
   
 
   return (
     <div>
-      <h1>Total spend this month</h1>
+      <h1>Total spend in  <button onClick={() => alert("Clicked!")}>Click Me</button></h1>
       <ResponsiveContainer width="100%" height={300}>
+     
         <BarChart data={[sums]}>
           <CartesianGrid strokeDasharray="1 1" />
           <XAxis dataKey="monthName" />
