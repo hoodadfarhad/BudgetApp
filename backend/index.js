@@ -28,7 +28,7 @@ db.connect();
 
 
 app.post('/api/figureCalc', async (req, res) => {
-  // console.log("kir");
+  
   
   // console.log( typeof(req.body.date.month));
   // console.log( (req.body.date.year));
