@@ -24,15 +24,23 @@ const db = new pg.Client({
 db.connect();
 
 
+
+
+
 app.post('/api/figureCalc', async (req, res) => {
+  // console.log("kir");
+  
+  // console.log( typeof(req.body.date.month));
+  // console.log( (req.body.date.year));
 
   const sum = await db.query(
     `SELECT t.is_income, SUM(t.amount)
      FROM transactions t
      WHERE t.owner_id = $1 
-       AND EXTRACT(MONTH FROM t.date) = EXTRACT(MONTH FROM CURRENT_DATE)
+       AND EXTRACT(MONTH FROM t.date) = $2
+       AND EXTRACT(YEAR FROM t.date) = $3
      GROUP BY t.is_income`,
-    [req.body.id]
+    [req.body.id, req.body.date.month, req.body.date.year ]
   );
   
   //  console.log(sum.rows);
@@ -41,6 +49,50 @@ app.post('/api/figureCalc', async (req, res) => {
 });
 
 
+
+
+app.post('/api/compareMonthCalc', async (req, res) => {
+
+
+  const inputMonth = req.body.date.month;
+const inputYear = req.body.date.year;
+
+let all3Combined = [];
+
+  // console.log( (req.body.date.year));
+
+
+  for (let i = 0; i < 3; i++) {
+    
+    let sum = await db.query(
+      `SELECT 
+    t.is_income, SUM(t.amount)
+  FROM transactions t
+  WHERE t.owner_id = $1 
+    AND (EXTRACT(MONTH FROM t.date) = $2 AND EXTRACT(YEAR FROM t.date) = $3)
+  GROUP BY t.is_income;`,
+  [req.body.id, inputMonth-i, inputYear]
+  );
+// console.log(sum.rows);
+
+all3Combined.push(
+  {
+    income: sum.rows.find(item => (item.is_income== true))?.sum || 0,
+    expense: sum.rows.find(item => (item.is_income== false))?.sum || 0
+  }
+  
+  );
+
+
+
+  }
+
+  
+  
+   console.log(all3Combined);
+  
+  res.json(all3Combined);
+});
 
 
 
@@ -53,8 +105,10 @@ app.post('/api/getCatAmount', async (req, res) => {
      FROM transactions t
      LEFT JOIN categories c ON t.category_id = c.id
      WHERE t.owner_id = $1 AND c.owner_id = $1 AND t.is_income= false
+     AND EXTRACT(MONTH FROM t.date) = $2
+       AND EXTRACT(YEAR FROM t.date) = $3
       GROUP BY category_name`,
-    [req.body.id]
+    [req.body.id, req.body.date.month, req.body.date.year ]
   );
 
   //  console.log(PieRecord.rows);
@@ -70,8 +124,11 @@ app.post('/api/getAllTransactions', async (req, res) => {
      FROM transactions t
      LEFT JOIN categories c ON t.category_id = c.id
      WHERE t.owner_id = $1 AND c.owner_id = $1
-     ORDER BY date DESC;`,
-    [req.body.id]
+       AND EXTRACT(MONTH FROM t.date) = $2
+       AND EXTRACT(YEAR FROM t.date) = $3
+       ORDER BY date DESC`,
+    [req.body.id, req.body.date.month, req.body.date.year ]
+    
   );
 
   //  console.log(history.rows);

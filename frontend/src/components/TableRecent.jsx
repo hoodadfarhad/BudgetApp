@@ -10,7 +10,8 @@ function TableRecent(prop) {
   const [range, setRange] = useState({ from: 0, to: 5, pgNumber: 1 });
   const [history, setHistory] = useState([]);
  
-  
+  const monthNameArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
+
 
 
 
@@ -21,7 +22,7 @@ useEffect(() => {
     const res = await fetch("http://localhost:5001/api/getAllTransactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: prop.id }),
+      body: JSON.stringify({ id: prop.id, date: prop.date }),
     });
     const transactionHistory = await res.json();
     setHistory(transactionHistory);
@@ -34,7 +35,7 @@ useEffect(() => {
   }
 
   transactionHistoryGetter();
-}, [prop.id]);
+}, [prop.id, prop.date]);
 
   const numOfPgs = Math.ceil(history.length / 5);
 
@@ -59,7 +60,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="table-responsive">
+    <div className="table-responsive tableHeight">
       <table className="table table-bordered">
         <thead className="table-dark">
           <tr>
@@ -69,6 +70,7 @@ useEffect(() => {
             <th>Modify</th>
           </tr>
         </thead>
+        {history.length !== 0 ?   
         <tbody>
         {history.slice(range.from, range.to).map((item, index) => {
   // console.log(item.is_income, typeof item.is_income);
@@ -93,10 +95,15 @@ useEffect(() => {
   );
 })}
 
-        </tbody>
+        </tbody> : <tr>
+      <td colSpan={4} style={{ textAlign: "center" }}>
+        No transactions found.
+      </td>
+    </tr> }
+      
       </table>
 
-      <div className="d-flex justify-content-center align-items-center gap-3">
+{history.length === 0 ? <p>no record</p>: <div className="d-flex justify-content-center align-items-center gap-3">
         <button
           className="btn btn-secondary"
           onClick={prevPg}
@@ -116,7 +123,8 @@ useEffect(() => {
         >
           &gt;
         </button>
-      </div>
+      </div>}
+      
     </div>
   );
 }

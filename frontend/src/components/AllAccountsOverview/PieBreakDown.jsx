@@ -47,7 +47,7 @@ useEffect (() => {
         const res = await fetch("http://localhost:5001/api/getCatAmount", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: prop.id }),
+            body: JSON.stringify({ id: prop.id, date: prop.date }),
           });
 
           const CatAmount = await res.json();
@@ -65,10 +65,10 @@ catGetter();
 
 
 
-},[prop.id])
-console.log("john cena");
+},[prop.id, prop.date])
+// console.log("john cena");
 
-console.log(categories);
+// console.log(categories);
 
 // if (categories.length > COLORS.length) {
     
@@ -76,7 +76,10 @@ console.log(categories);
 
 
   return (
+
     <div style={{ width: "100%", height: 300, marginTop:35  }}>
+
+      {categories.length === 0 ? <h2>No record found.</h2>: 
       <ResponsiveContainer>
         <PieChart>
           <Pie
@@ -95,7 +98,8 @@ console.log(categories);
           <Tooltip />
           <Legend />
         </PieChart>
-      </ResponsiveContainer>
+      </ResponsiveContainer> }
+      
     </div>
   );
 }

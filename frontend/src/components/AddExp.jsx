@@ -34,8 +34,8 @@ function Expenses(prop) {
   
 
   function clickedIncome() {
-    setIsIncome((ghablia) => {
-      return !ghablia;
+    setIsIncome((prev) => {
+      return !prev;
     });
   }
 
@@ -138,7 +138,7 @@ toggle-lable stack
                   type="checkbox"
                   role="switch"
                   id="flexSwitchCheckChecked"
-                  value={isIncome}
+                  checked={isIncome}
                   onChange={clickedIncome}
                 />
               </div>

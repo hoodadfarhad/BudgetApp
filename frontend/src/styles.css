@@ -2,7 +2,7 @@
   font-family: sans-serif;
   text-align: center;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 html,
@@ -42,7 +42,7 @@ body {
   grid-template-rows: 1fr;
   height: 100%;
   width: 100vw;
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .link-body-emphasis:hover {
@@ -57,7 +57,15 @@ body {
   background-color: aliceblue;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 2fr 3fr;
+  grid-template-rows: 1fr 4fr 6fr;
+}
+
+.firstRow{
+  grid-column: span 2;
+  grid-column-start: 1;
+  grid-column-end: 3;
+  height: 50px;
+  margin-top: 20px;
 }
 
 .newCardInput {
@@ -112,3 +120,10 @@ body {
   background-color: blueviolet;
 } */
 
+.recentTrans{
+  height: 100%;
+}
+
+.tableHeight{
+  height: 100%;
+}
