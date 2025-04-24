@@ -65,11 +65,15 @@ function Expenses(prop) {
   }
 
  async function categoryGetter(params) {
-  const res = await fetch("http://localhost:5001/api/getCategories");
+  const res = await fetch("http://localhost:5001/api/getCategories", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: userID}),
+  });
   const resultCat = await res.json();
   setCategory(resultCat.map(cat => cat.name));
-  // console.log(resultCat); 
-  return resultCat;
+  console.log(resultCat); 
+  // return resultCat;
   }
 
   async function handleSubmit(event) {
@@ -87,7 +91,7 @@ function Expenses(prop) {
         description,
         userID
       };
-      // console.log(" Sending userID:", userID);
+      // console.log(" Sending userID:", transactionDataToSendBack.account);
       const res = await fetch("http://localhost:5001/api/newTransaction", {
         method: "POST",
         headers: { "Content-Type": "application/json" },

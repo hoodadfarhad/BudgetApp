@@ -1,16 +1,36 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import pg from "pg";
+import pg from 'pg';
+import session from 'express-session';
+import passport from './auth/passport.js';
+import authRoutes from './routes/auth.js';
 
+
+// console.log("From server.js:", process.env.GOOGLE_CLIENT_ID);
+
+dotenv.config();
 
 const app = express();
 const PORT = 5001;
 
-app.use(express.json());
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}));
 
-dotenv.config();
+app.use(express.json());
+
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false,
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', authRoutes);
+
 
 
 const db = new pg.Client({
@@ -24,7 +44,38 @@ const db = new pg.Client({
 db.connect();
 
 
+app.post('/api/setID', async (req, res) => {
+  
+  console.log("Incoming ID:", req.body.OAuthID);
 
+  if (!req.body.OAuthID) {
+    return res.status(400).json({ error: "Missing OAuthID in request body" });
+  }
+
+
+  const result = await db.query(
+    `INSERT INTO "userID" ("OAuthID")
+     VALUES ($1)
+     ON CONFLICT ("OAuthID") DO NOTHING
+     RETURNING "APPID"`,
+    [req.body.OAuthID]
+  );
+  
+  // If nothing was inserted
+  let appID;
+  if (result.rows.length === 0) {
+    const existing = await db.query(
+      `SELECT "APPID" FROM "userID" WHERE "OAuthID" = $1`,
+      [req.body.OAuthID]
+    );
+    appID = existing.rows[0].APPID;
+  } else {
+    appID = result.rows[0].APPID;
+  }
+  
+  res.json( {appID} );
+  
+});
 
 
 app.post('/api/figureCalc', async (req, res) => {
@@ -89,7 +140,7 @@ all3Combined.push(
 
   
   
-   console.log(all3Combined);
+  //  console.log(all3Combined);
   
   res.json(all3Combined);
 });
@@ -101,15 +152,16 @@ app.post('/api/getCatAmount', async (req, res) => {
   // console.log("this got called");
 
   const PieRecord = await db.query(
-    `SELECT SUM(t.amount), c.name AS category_name
+    `SELECT SUM(t.amount) AS total, c.name AS category_name
      FROM transactions t
-     LEFT JOIN categories c ON t.category_id = c.id
-     WHERE t.owner_id = $1 AND c.owner_id = $1 AND t.is_income= false
-     AND EXTRACT(MONTH FROM t.date) = $2
+     INNER JOIN categories c ON c.id = t.category_id
+     WHERE t.owner_id = $1 AND t.is_income = false
+       AND EXTRACT(MONTH FROM t.date) = $2
        AND EXTRACT(YEAR FROM t.date) = $3
-      GROUP BY category_name`,
-    [req.body.id, req.body.date.month, req.body.date.year ]
+     GROUP BY c.name`,
+    [req.body.id, req.body.date.month, req.body.date.year]
   );
+  
 
   //  console.log(PieRecord.rows);
   
@@ -162,10 +214,12 @@ app.post('/api/getAllTransactions', async (req, res) => {
     res.status(201).json({ message: "account added!", resultAddingAccount: resultAddingAccount.rows[0] });
   });
 
-  app.get('/api/getCategories', async (req, res) => {
+  app.post('/api/getCategories', async (req, res) => {
 
     const categories = await db.query(
-      `SELECT name FROM categories`
+      `SELECT name FROM categories
+      WHERE owner_id=$1 AND to_show=$2`,
+      [req.body.id,true]
     );
     // console.log(categories.rows);
     
@@ -173,7 +227,7 @@ app.post('/api/getAllTransactions', async (req, res) => {
   });
 
 app.post('/api/newTransaction', async (req, res) => {
-    console.log("reqqq receiveeed");
+    // console.log("reqqq receiveeed");
     
     // console.log(req.body);
 
@@ -212,13 +266,15 @@ app.post('/api/newTransaction', async (req, res) => {
 
 
   app.post('/api/addCategory', async (req, res) => {
-    console.log("req for adding cat receiveeed");
+    // console.log("req for adding cat receiveeed");
     
     // console.log(req.body.name);
 
     const resultAddingCat = await db.query(
       `INSERT INTO categories (name, owner_id)
-       VALUES ($1,$2)`,
+       VALUES ($1,$2)
+       ON CONFLICT (name, owner_id)
+DO UPDATE SET to_show = true;`,
       [req.body.name, req.body.owner_id]
     );
 
@@ -229,17 +285,20 @@ app.post('/api/newTransaction', async (req, res) => {
 
 
   app.post('/api/rmvCategory', async (req, res) => {
-    console.log("req for deleting cat receiveeed");
+    // console.log("req for deleting cat receiveeed");
     
     // console.log(req.body.name);
 
     const resultremovingCat = await db.query(
-      `DELETE FROM categories WHERE name = $1 AND owner_id=$2`,
+      `UPDATE categories
+SET to_show = false
+WHERE name = $1 AND owner_id = $2;
+`,
       [req.body.name, req.body.owner_id]
     );
 
 
-    res.status(201).json({ message: "added!", resultremovingCat: resultremovingCat.rows[0] });
+    res.status(201).json({ message: "hid!", resultremovingCat: resultremovingCat.rows[0] });
   });
 
 

@@ -17,7 +17,7 @@ function TableRecent(prop) {
 
 
 useEffect(() => {
-  console.log(history);
+  // console.log(history);
   async function transactionHistoryGetter() {
     const res = await fetch("http://localhost:5001/api/getAllTransactions", {
       method: "POST",
@@ -27,11 +27,11 @@ useEffect(() => {
     const transactionHistory = await res.json();
     setHistory(transactionHistory);
 
-    if (res.ok) {
-      console.log("Transactions pulled!");
-    } else {
-      console.log("Something went wrong with pulling transactions.");
-    }
+    // if (res.ok) {
+    //   console.log("Transactions pulled!");
+    // } else {
+    //   console.log("Something went wrong with pulling transactions.");
+    // }
   }
 
   transactionHistoryGetter();

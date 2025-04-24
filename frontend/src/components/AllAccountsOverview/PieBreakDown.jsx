@@ -55,7 +55,7 @@ useEffect (() => {
           
           const parsed = CatAmount.map(item => ({
             ...item,
-            sum: parseFloat(item.sum)
+            sum: parseFloat(item.total)
           }))
 
           setCategories(parsed);

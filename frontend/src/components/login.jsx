@@ -1,20 +1,17 @@
-// import React, { useState } from "react";
-// import { create } from 'zustand';
+import React from "react";
 
+function Login() {
+  const handleLogin = () => {
+  
+    window.location.href = "http://localhost:5001/auth/google";
+  };
 
+  return (
+    <div>
+      <h2>Login</h2>
+      <button onClick={handleLogin}>Login with Google</button>
+    </div>
+  );
+}
 
-// function Login(prop) {
-
-//   const useUserStore = create(set => ({
-//     userID: 1,
-//     setUserID: (id) => set({ userID: id })
-//   }));
-   
-//   return (
-//     <div className="">
-     
-//     </div>
-//   );
-// }
-
-// export default Login;
+export default Login;

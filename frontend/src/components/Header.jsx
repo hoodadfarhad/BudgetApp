@@ -24,11 +24,10 @@ function Header(prop) {
             </nav>
 
             <div className="text-end">
-              <button type="button" className="btn btn-outline-light me-2">
-                Login
-              </button>
               <button type="button" className="btn btn-warning">
-                Sign-up
+              <Link to="/login" className="nav-link">
+                Login
+                </Link>
               </button>
             </div>
           </div>

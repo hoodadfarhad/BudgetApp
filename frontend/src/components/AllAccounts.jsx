@@ -33,9 +33,7 @@ function AllAccounts(prop) {
       
       <CurrentMonth id={userID} date={date}/>
       {/* {console.log("hey")  } */}
-      <CompareMonths id={userID} date={date}/>
-  
-      
+      <CompareMonths id={userID} date={date}/>    
         <RecentTransactions id={userID} date={date}/>
         <PieBreakDown id={userID} date={date}/>
       

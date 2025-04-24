@@ -38,7 +38,7 @@ useEffect(()=>{
     });
     const calcResult = await res.json();
 
-    console.log(calcResult);
+    // console.log(calcResult);
     
 
 

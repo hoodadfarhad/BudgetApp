@@ -58,7 +58,7 @@ useEffect(()=>{
     const calcResult = await res.json();
 
     // console.log(calcResult);
-    console.log(prop.date.month);
+    // console.log(prop.date.month);
     
 
 
@@ -102,7 +102,7 @@ function adjustMonthYear(month, year) {
       }
     }
   
-    console.log("Highest value:", highest);
+    // console.log("Highest value:", highest);
     return highest;
   }
   
