@@ -172,7 +172,7 @@ app.post('/api/getCatAmount', async (req, res) => {
 app.post('/api/getAllTransactions', async (req, res) => {
 
   const history = await db.query(
-    `SELECT t.amount, t.date, t.is_income, t.description, c.name AS category_name
+    `SELECT t.amount, t.date, t.is_income, t.description, c.name AS category_name, t.id
      FROM transactions t
      LEFT JOIN categories c ON t.category_id = c.id
      WHERE t.owner_id = $1 AND c.owner_id = $1
@@ -226,12 +226,15 @@ app.post('/api/getAllTransactions', async (req, res) => {
     res.json(categories.rows);
   });
 
-app.post('/api/newTransaction', async (req, res) => {
+
+
+
+app.post('/api/AddUpdateTransaction', async (req, res) => {
     // console.log("reqqq receiveeed");
     
     // console.log(req.body);
 
-    const { isIncome, account, category, date, fee, description, userID  } = req.body;
+    const { isIncome, account, category, date, fee, description, userID, modifiedRow   } = req.body;
     
     // console.log(description);
     //category,account,
@@ -249,7 +252,13 @@ app.post('/api/newTransaction', async (req, res) => {
         [userID, category]
         );
         // console.log(categoryID.rows[0].id);
+ 
+        
+        console.log(modifiedRow);
+        
       
+  if (modifiedRow === -1) {
+    
   
 
     const result = await db.query(
@@ -259,9 +268,23 @@ app.post('/api/newTransaction', async (req, res) => {
       [userID, parseFloat(fee), isIncome, date, accountID.rows[0].id, categoryID.rows[0].id, description]
     );
 
-
+  
     res.status(201).json({ message: "Transaction saved", transaction: result.rows[0] });
+
+  } else{  // when updating a row
+
+    const result = await db.query(
+
+'UPDATE transactions SET owner_id = $1, amount = $2, is_income = $3, date = $4, account_id = $5, category_id = $6,  description= $7 WHERE id = $8 RETURNING *',
+      [userID, parseFloat(fee), isIncome, date, accountID.rows[0].id, categoryID.rows[0].id, description, modifiedRow]
+    );
+    res.status(201).json({ message: "Transaction updated", transaction: result.rows[0] });
+
+  }
   });
+
+  
+  
 
 
 

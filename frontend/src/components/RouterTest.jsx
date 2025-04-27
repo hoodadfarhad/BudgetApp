@@ -6,7 +6,7 @@ function Route2(prop) {
   return (
     <div>
       <Header />
-      <h1>SALAM BITCH</h1>
+      <h1>Hello World</h1>
     </div>
   );
 }

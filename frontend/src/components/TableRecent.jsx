@@ -9,6 +9,10 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 function TableRecent(prop) {
   const [range, setRange] = useState({ from: 0, to: 5, pgNumber: 1 });
   const [history, setHistory] = useState([]);
+  const [hoveredDescription, setHoveredDescription] = useState("");
+  const [hoverPosition, setHoverPosition] = useState({ x: 0, y: 0 });
+  const [showTooltip, setShowTooltip] = useState(false);
+  
  
   const monthNameArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
 
@@ -25,7 +29,10 @@ useEffect(() => {
       body: JSON.stringify({ id: prop.id, date: prop.date }),
     });
     const transactionHistory = await res.json();
+  
+    
     setHistory(transactionHistory);
+
 
     // if (res.ok) {
     //   console.log("Transactions pulled!");
@@ -59,6 +66,27 @@ useEffect(() => {
     });
   }
 
+
+
+  
+  function handleClick(item) {  // ITEM MITUNE INJA ITEM.ID tarif BESHE VASE INSERT/UPDATE
+    console.log("I was clicked!?");
+    prop.setModifyExpData({
+      category: item.category_name,
+      account: "bayad az db bekeshim bala", // vaqti history ro set mikonim
+      date: item.date,
+      isIncome: item.is_income,
+      description: item.description,
+      amount: item.amount,
+      modifiedRow: item.id
+    })
+
+
+    
+    prop.setClickedOption(1);
+     
+  }
+
   return (
     <div className="table-responsive tableHeight">
       <table className="table table-bordered">
@@ -74,8 +102,20 @@ useEffect(() => {
         <tbody>
         {history.slice(range.from, range.to).map((item, index) => {
   // console.log(item.is_income, typeof item.is_income);
+  // console.log(item);
   return (
-    <tr key={index}>
+    <tr key={index} 
+    onMouseEnter={(e) => {
+      setHoveredDescription(item.description);
+      setShowTooltip(true);
+      setHoverPosition({ x: e.clientX, y: e.clientY });
+    }}
+    onMouseMove={(e) => {
+      setHoverPosition({ x: e.clientX, y: e.clientY });
+    }}
+    onMouseLeave={() => {
+      setShowTooltip(false);
+    }}>
       {/* <td>{index + 1}</td> */}
       <td>{item.category_name}</td>
       <td style={{
@@ -87,7 +127,7 @@ useEffect(() => {
       <td>{item.date.slice(0, 10)}</td>
       {/* <td>{item.description}</td> */}
       <td>
-        <button>
+        <button onClick={() => handleClick(item)}>
           <i className="bi bi-pencil-square"></i>
         </button>
       </td>
@@ -125,6 +165,27 @@ useEffect(() => {
         </button>
       </div>}
       
+
+      {showTooltip ? (
+  <div
+    style={{
+      position: "fixed",
+      top: hoverPosition.y + 15,
+      left: hoverPosition.x + 15,
+      backgroundColor: "black",
+      color: "white",
+      padding: "6px 10px",
+      borderRadius: "4px",
+      pointerEvents: "none",
+      fontSize: "14px",
+      maxWidth: "250px",
+      zIndex: 1000
+    }}
+  >
+    {hoveredDescription}
+  </div>
+) : null}
+
     </div>
   );
 }

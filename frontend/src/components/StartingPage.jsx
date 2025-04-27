@@ -10,7 +10,19 @@ import { Link } from "react-router-dom";
 
 function StartingPage(prop) {
   const [clickedOption, setClickedOption] = useState(0);
+  const [modifyExpData,setModifyExpData] = useState({
+    category: "TBD",
+    account: "TBD",
+    date: '2025-01-01',
+    isIncome: true,
+    description: "TBD",
+    amount: 0,
+    modifiedRow: -1
+  })
  
+
+  
+  console.log(modifyExpData);
   
   
 
@@ -24,9 +36,9 @@ function StartingPage(prop) {
         setClickedOption(1);
         break;
 
-      case 2:
-        setClickedOption(2);
-        break;
+      // case 2:
+      //   setClickedOption(2);
+      //   break;
 
       case 3:
         setClickedOption(3);
@@ -45,16 +57,16 @@ function StartingPage(prop) {
   function WhatToRender(op) {
     switch (op) {
       case 0:
-        return <Overview />;
+        return <Overview setClickedOption={setClickedOption} setModifyExpData={setModifyExpData} />;
         break;
 
       case 1:
-        return <AddExpenses />;
+        return <AddExpenses modifyExpData={modifyExpData} setModifyExpData={setModifyExpData} />;
         break;
-      case 2:
-        return <Dashboard />;
-        // return <Dashboard />; modify/add accounts
-        break;
+      // case 2:
+      //   return <Dashboard />;
+      //   // return <Dashboard />; modify/add accounts
+      //   break;
 
       // add-new component goes here:
       case 3:

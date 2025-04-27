@@ -34,7 +34,7 @@ function AllAccounts(prop) {
       <CurrentMonth id={userID} date={date}/>
       {/* {console.log("hey")  } */}
       <CompareMonths id={userID} date={date}/>    
-        <RecentTransactions id={userID} date={date}/>
+        <RecentTransactions id={userID} date={date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData}/>
         <PieBreakDown id={userID} date={date}/>
       
     </div>

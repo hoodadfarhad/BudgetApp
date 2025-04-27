@@ -16,6 +16,23 @@ function Expenses(prop) {
 
   useEffect(() => {
     categoryGetter();
+
+
+if (prop.modifyExpData.account !== "TBD") {
+  setState({
+    name1: prop.modifyExpData.account ,
+    name2: prop.modifyExpData.category
+  });
+  setFee(prop.modifyExpData.amount);
+  setDescription(prop.modifyExpData.description);
+  setDate(prop.modifyExpData.date);
+  setIsIncome(prop.modifyExpData.isIncome)
+}
+
+return () =>{
+  resetModifyExpData();
+};
+
   }, []);
 
 
@@ -30,7 +47,28 @@ function Expenses(prop) {
   const [description, setDescription] = useState("");
   const { userID, setUserID } = useUserStore();
 
+function resetModifyExpData() {
 
+  prop.setModifyExpData({
+      category: "Category",
+      account: "Select Account", 
+      date: "",
+      isIncome: false,
+      description: "",
+      amount: "",
+      modifiedRow: -1
+    })
+  
+    // setIsIncome(false);
+    // setDate("");
+    // setState({ name1: "Select Account",
+    //   name2: "Category"});
+    //   setFee("");
+    //   setDescription("")
+  
+}
+
+  
   
 
   function clickedIncome() {
@@ -76,6 +114,9 @@ function Expenses(prop) {
   // return resultCat;
   }
 
+
+
+
   async function handleSubmit(event) {
     event.preventDefault();
 
@@ -89,22 +130,26 @@ function Expenses(prop) {
         date,
         fee,
         description,
-        userID
+        userID,
+        modifiedRow: prop.modifyExpData.modifiedRow
       };
       // console.log(" Sending userID:", transactionDataToSendBack.account);
-      const res = await fetch("http://localhost:5001/api/newTransaction", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(transactionDataToSendBack),
-      });
-      const result = await res.json();
-      console.log(result);
-      if (res.ok) {
-        
-        alert("Transaction submitted!");
-      } else {
-        alert("Something went wrong.");
-      }
+
+  const res = await fetch("http://localhost:5001/api/AddUpdateTransaction", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(transactionDataToSendBack),
+  });
+  const result = await res.json();
+  console.log(result);
+  if (res.ok) {
+    
+    alert("Transaction submitted!");
+  } else {
+    alert("Something went wrong.");
+  }
+
+
     }
 
     stateReset();
