@@ -20,4 +20,24 @@ router.get('/infoGetter', (req, res) => {
   }
 });
 
+router.get('/logout', (req, res) => {
+  req.logout(err => {
+    if (err) {
+      console.error("Logout error:", err);
+      return res.status(500).send("Error logging out.");
+    }
+
+    req.session.destroy(err => {
+      if (err) {
+        console.error("Session destroy error:", err);
+        return res.status(500).send("Error destroying session.");
+      }
+
+      res.clearCookie('connect.sid'); // remove cookie from browser
+      res.redirect('http://localhost:3000/'); 
+    });
+  });
+});
+
+
 export default router;

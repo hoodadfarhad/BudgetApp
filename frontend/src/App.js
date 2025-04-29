@@ -59,7 +59,7 @@ useEffect(() => {
     <div>
       <Routes>
         <Route path="/about" element={<Route2 />} />
-        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} /> : <Route2/>} />
+        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} /> : <Route2/>} />
         <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} />} />
       </Routes>
     </div>

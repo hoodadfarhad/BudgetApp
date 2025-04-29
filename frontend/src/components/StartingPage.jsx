@@ -86,7 +86,7 @@ function StartingPage(prop) {
 
   return (
     <div className="App">
-      <Header googleInfo={prop.googleInfo} />
+      <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} />
 
       <div className="mainPage">
         <Sidebar optionSelector={SideBarResult} />

@@ -2,6 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Header(prop) {
+
+function logOutHandle(params) {
+  prop.setIsAuth(false);
+}
+
+
   return (
     <div>
       <header className="p-3 text-bg-dark">
@@ -25,7 +31,10 @@ function Header(prop) {
 
             <div className="text-end">
              
-                {prop.googleInfo ? <h4>Welcome  {prop.googleInfo.fname}!</h4> : <button type="button" className="btn btn-warning"><Link to="/login" className="nav-link">
+                {prop.googleInfo ? <div><h4>Welcome  {prop.googleInfo.fname}!</h4> <button type="button" onClick={logOutHandle} className="btn btn-warning"><Link to="/" className="nav-link">
+                LogOut
+                </Link>
+              </button> </div>: <button type="button" className="btn btn-warning"><Link to="/login" className="nav-link">
                 Login
                 </Link>
               </button>}
