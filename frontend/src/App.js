@@ -11,6 +11,10 @@ export default function App() {
 
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const {userID, setUserID } = useUserStore();
+const [fetchedGoogleInfo, setFetchedGoogleInfo] = useState({
+  fname: "",
+  email: ""
+})
 
 useEffect(() => {
   async function authChecker() {
@@ -19,20 +23,29 @@ useEffect(() => {
     });
 
     const userInfo = await res.json();
-    console.log("Fetched user info:", userInfo); // Debug
+    setFetchedGoogleInfo({
+      fname: userInfo.firstName,
+      email: userInfo.email
+    })
+
+
+    console.log("Fetched user info:", userInfo); 
+
+
+
 
     if (userInfo.userID) {
       const idRes = await fetch("http://localhost:5001/api/setID", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ OAuthID: userInfo.userID }), // ✅ match backend
+        body: JSON.stringify({ OAuthID: userInfo.userID }), 
       });
 
       const { appID } = await idRes.json();
       console.log("Returned appID from DB:", appID);
 
-      setUserID(appID); // ✅ set the actual number
+      setUserID(appID); 
     }
 
     setIsAuthenticated(userInfo.isAuthenticated);
@@ -46,7 +59,7 @@ useEffect(() => {
     <div>
       <Routes>
         <Route path="/about" element={<Route2 />} />
-        <Route path="/" element={isAuthenticated? <StartingPage /> : <Route2/>} />
+        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} /> : <Route2/>} />
         <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} />} />
       </Routes>
     </div>

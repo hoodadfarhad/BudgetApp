@@ -24,11 +24,12 @@ function Header(prop) {
             </nav>
 
             <div className="text-end">
-              <button type="button" className="btn btn-warning">
-              <Link to="/login" className="nav-link">
+             
+                {prop.googleInfo ? <h4>Welcome  {prop.googleInfo.fname}!</h4> : <button type="button" className="btn btn-warning"><Link to="/login" className="nav-link">
                 Login
                 </Link>
-              </button>
+              </button>}
+              
             </div>
           </div>
         </div>

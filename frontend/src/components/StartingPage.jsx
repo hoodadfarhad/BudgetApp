@@ -22,7 +22,7 @@ function StartingPage(prop) {
  
 
   
-  console.log(modifyExpData);
+  console.log(prop.googleInfo);
   
   
 
@@ -86,7 +86,7 @@ function StartingPage(prop) {
 
   return (
     <div className="App">
-      <Header />
+      <Header googleInfo={prop.googleInfo} />
 
       <div className="mainPage">
         <Sidebar optionSelector={SideBarResult} />

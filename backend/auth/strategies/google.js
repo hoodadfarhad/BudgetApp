@@ -8,11 +8,17 @@ export function getGoogleStrategy() {
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     callbackURL: '/auth/google/callback',
   }, (accessToken, refreshToken, profile, done) => {
+
+
     const user = {
       id: profile.id,
       email: profile.emails?.[0]?.value,
+      firstName: profile.name.givenName,
       provider: 'google'
     };
+
+
+    
     return done(null, user);
   });
 }
