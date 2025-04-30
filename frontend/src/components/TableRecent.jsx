@@ -73,7 +73,7 @@ useEffect(() => {
     console.log("I was clicked!?");
     prop.setModifyExpData({
       category: item.category_name,
-      account: "bayad az db bekeshim bala", // vaqti history ro set mikonim
+      account: item.account_name, // vaqti history ro set mikonim
       date: item.date,
       isIncome: item.is_income,
       description: item.description,

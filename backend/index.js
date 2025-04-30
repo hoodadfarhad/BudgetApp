@@ -174,13 +174,24 @@ app.post('/api/getCatAmount', async (req, res) => {
 app.post('/api/getAllTransactions', async (req, res) => {
 
   const history = await db.query(
-    `SELECT t.amount, t.date, t.is_income, t.description, c.name AS category_name, t.id
-     FROM transactions t
-     LEFT JOIN categories c ON t.category_id = c.id
-     WHERE t.owner_id = $1 AND c.owner_id = $1
-       AND EXTRACT(MONTH FROM t.date) = $2
-       AND EXTRACT(YEAR FROM t.date) = $3
-       ORDER BY date DESC`,
+    `SELECT 
+        t.amount,
+        t.date,
+        t.is_income,
+        t.description,
+        c.name AS category_name,
+        a.name AS account_name,
+        t.id
+      FROM transactions t
+      LEFT JOIN categories c ON t.category_id = c.id
+      LEFT JOIN accounts a ON t.account_id = a.id
+      WHERE 
+        t.owner_id = $1 AND 
+        c.owner_id = $1 AND 
+        a.owner_id = $1 AND
+        EXTRACT(MONTH FROM t.date) = $2 AND 
+        EXTRACT(YEAR FROM t.date) = $3
+      ORDER BY t.date DESC`,
     [req.body.id, req.body.date.month, req.body.date.year ]
     
   );

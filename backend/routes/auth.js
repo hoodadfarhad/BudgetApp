@@ -3,7 +3,11 @@ import passport from '../auth/passport.js';
 
 const router = express.Router();
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'] }));
+router.get('/google', passport.authenticate('google', {
+  scope: ['profile', 'email'],
+  prompt: 'select_account'  // forcing to ask what google account after each logout
+}));
+
 router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/login',
   successRedirect: 'http://localhost:3000/'
