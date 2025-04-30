@@ -19,12 +19,12 @@ function Cards(prop) {
 
         const data = await res.json();
         
-        
-        const names = data.existingAccounts.map((item) => item.name);
-        // console.log(names);
-setCardArr(names);
-
-
+        const cardInfo = data.existingAccounts.map((item) => ({
+          name: item.name,
+          id: item.id,
+          balance: item.balance
+        }));
+setCardArr(cardInfo);
 
         
 
@@ -40,8 +40,11 @@ setCardArr(names);
       <AddNewCard cardSelector={prop.cardSelector} />
       {cardArr.map((inp, idx) => (
         <ExistingCard
-          name={inp} 
-          id={idx}
+          name={inp.name} 
+          cardID={inp.id}
+          // cardBalance={inp.balance}
+          accNumber={prop.accNumber} 
+          setAccNumber={prop.setAccNumber}
           key={idx}
           cardsSelector={prop.cardSelector}
         />

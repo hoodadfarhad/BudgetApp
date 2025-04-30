@@ -212,7 +212,7 @@ Drop Down for Accounts
                   {cardArr.map((item, index) => {
                     return (
                       <DropDown
-                        items={item}
+                        items={item.name}
                         key={index}
                         setFace={setState}
                         name="name1"

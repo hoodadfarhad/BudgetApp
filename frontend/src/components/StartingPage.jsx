@@ -5,11 +5,13 @@ import Dashboard from "./Dashboard";
 import AddExpenses from "./AddExp";
 import Overview from "./AllAccounts";
 import NewCardPanel from "./NewCardPanel";
+import OverviewEach from "./OverviewEach";
 
 import { Link } from "react-router-dom";
 
 function StartingPage(prop) {
   const [clickedOption, setClickedOption] = useState(0);
+  const [accNumber, setAccNumber] = useState(null)
   const [modifyExpData,setModifyExpData] = useState({
     category: "TBD",
     account: "TBD",
@@ -26,33 +28,19 @@ function StartingPage(prop) {
   
   
 
-  function SideBarResult(id) {
-    switch (id) {
-      case 0:
-        setClickedOption(0);
-        break;
-
-      case 1:
-        setClickedOption(1);
-        break;
-
-      // case 2:
-      //   setClickedOption(2);
-      //   break;
-
-      case 3:
-        setClickedOption(3);
-        break;
-
-      case 4:
-        setClickedOption(4);
-        break;
-
-      default:
-        console.log("Wrong Click Handling");
-        break;
+  function SideBarResult(id) {    // it turned out that in switch case, states cannot be used since they are not constant
+    // console.log("Selected ID:", id);
+  
+    if (id === 0 || id === 1 || id === 3) {
+      setClickedOption(id);
+    }  else {
+      setAccNumber(id);
+      setClickedOption(id);
     }
   }
+
+
+  
 
   function WhatToRender(op) {
     switch (op) {
@@ -63,33 +51,34 @@ function StartingPage(prop) {
       case 1:
         return <AddExpenses modifyExpData={modifyExpData} setModifyExpData={setModifyExpData} />;
         break;
-      // case 2:
-      //   return <Dashboard />;
-      //   // return <Dashboard />; modify/add accounts
-      //   break;
-
-      // add-new component goes here:
+    
       case 3:
         return <NewCardPanel />;
         break;
 
       // card component goes here:
-      case 4:
-        return <Overview />;
-        break;
-
-      default:
-        return <Overview />;
+        default:
+           {
+            console.log("AccNum by Clicking: " + accNumber);
+            
+            return <OverviewEach accNumber={accNumber} />;
+          }
+        
         break;
     }
   }
+
+  
+  // useEffect(() => {
+  //   console.log(accNumber);
+  // }, [accNumber]);
 
   return (
     <div className="App">
       <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} />
 
       <div className="mainPage">
-        <Sidebar optionSelector={SideBarResult} />
+        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} />
         {WhatToRender(clickedOption)}
       </div>
     </div>

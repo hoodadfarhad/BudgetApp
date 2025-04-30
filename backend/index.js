@@ -205,7 +205,7 @@ app.post('/api/getAllTransactions', async (req, res) => {
   app.post('/api/accountsGetter', async (req, res) => {
 
     const existingAccounts = await db.query(
-      `SELECT name FROM accounts WHERE owner_id=$1`,
+      `SELECT id, name, balance FROM accounts WHERE owner_id=$1`,
       [req.body.owner_id]
     );
     
