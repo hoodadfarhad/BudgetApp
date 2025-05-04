@@ -1,11 +1,48 @@
-import React from "react";
-import Cards from "./Cards";
+import React, { useState } from "react";
 
+import CurrentMonth from "./AllAccountsOverview/CurrentMonth";
+import CompareMonths from "./AllAccountsOverview/CompareMonths";
+import RecentTransactions from "./AllAccountsOverview/RecentTransactions";
+import PieBreakDown from "./AllAccountsOverview/PieBreakDown";
+import Cards from "./Cards";
+import { Button } from "@mui/material";
+import DatePickerFunc from "./DatePicker";
+import useUserStore from './useUserStore'; 
+import useAccountStore from './useAccountsStore';
 
 function OverviewEach(prop) {
+
+  const { userID } = useUserStore();
+  const { cardArr, setCardArr } = useAccountStore();
+
+  const t = new Date();
+const [date, setDate] = useState({
+        month: t.getMonth() + 1,
+        year: t.getFullYear()
+      })
+
+
   return (
     <div>
-      <h1>{prop.accNumber}</h1>     //use the Zustand global state cardArr .balance and .id to pull relevant data from db
+    //use the Zustand global state cardArr .balance and .id to pull relevant data from db
+    <h1>Account name: {cardArr.find(item => item.id === prop.accNumber)?.name}</h1>
+    <h2>Total Balance: {cardArr.find(item => item.id === prop.accNumber)?.balance}</h2>
+    <Button>Modify Account</Button>
+    <div className="allAcc">
+      <div className="firstRow">
+      <h1 >In the month of <DatePickerFunc dateAtAllAcc={setDate}/>
+:  </h1>
+
+      </div>
+      
+      <CurrentMonth id={userID} date={date} accountID={prop.accNumber}/>  
+      {/* {console.log("hey")  } */}
+      <CompareMonths id={userID} date={date} accountID={prop.accNumber}/>    
+        <RecentTransactions id={userID} date={date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} accountID={prop.accNumber}/>
+        <PieBreakDown id={userID} date={date} accountID={prop.accNumber}/>
+      
+    </div>
+    
     </div>
   );
 }

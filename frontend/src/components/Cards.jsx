@@ -26,6 +26,7 @@ function Cards(prop) {
         }));
 setCardArr(cardInfo);
 
+      //  console.log(cardArr);
         
 
     }

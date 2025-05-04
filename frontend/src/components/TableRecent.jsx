@@ -26,7 +26,7 @@ useEffect(() => {
     const res = await fetch("http://localhost:5001/api/getAllTransactions", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: prop.id, date: prop.date }),
+      body: JSON.stringify({ id: prop.id, date: prop.date, accountID: prop.accountID }),
     });
     const transactionHistory = await res.json();
   
@@ -42,7 +42,7 @@ useEffect(() => {
   }
 
   transactionHistoryGetter();
-}, [prop.id, prop.date]);
+}, [prop.id, prop.date, prop.accountID]);
 
   const numOfPgs = Math.ceil(history.length / 5);
 
@@ -78,7 +78,8 @@ useEffect(() => {
       isIncome: item.is_income,
       description: item.description,
       amount: item.amount,
-      modifiedRow: item.id
+      modifiedRow: item.id,
+      transEditRequested: true
     })
 
 

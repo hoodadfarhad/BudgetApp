@@ -29,15 +29,19 @@ function CurrentMonth(prop) {
 
 useEffect(()=>{
   
+  // console.log(prop.accountID);
+  
 
   async function historyCalc() {
-    const res = await fetch("http://localhost:5001/api/figureCalc", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: prop.id, date: prop.date }),
-    });
-    const calcResult = await res.json();
-
+  
+      const res = await fetch("http://localhost:5001/api/figureCalc", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: prop.id, date: prop.date, accountID: prop.accountID }),
+      });
+      const calcResult = await res.json();
+  
+   
     // console.log(calcResult);
     
 
@@ -67,7 +71,7 @@ useEffect(()=>{
 
 
   
-},[prop.id, prop.date])
+},[prop.id, prop.date, prop.accountID])
   
   
 

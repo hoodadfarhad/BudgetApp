@@ -28,7 +28,7 @@ function CompareMonths(prop) {
 
 
   const [data, setData] = useState([
-    { name: monthNameArr[prop.date.month] + " " + prop.date.year, income: 40, expenses: 0 },
+    { name: monthNameArr[prop.date.month] + " " + prop.date.year, income: 0, expenses: 0 },
     { name: monthNameArr[prop.date.month - 1] + " " + prop.date.year, income: 0, expenses: 0 },
     { name: monthNameArr[prop.date.month - 2] + " " + prop.date.year, income: 0, expenses: 0 },
   ]);
@@ -53,7 +53,7 @@ useEffect(()=>{
     const res = await fetch("http://localhost:5001/api/compareMonthCalc", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: prop.id, date: prop.date }),
+      body: JSON.stringify({ id: prop.id, date: prop.date,  accountID: prop.accountID }),
     });
     const calcResult = await res.json();
 
@@ -113,7 +113,7 @@ function adjustMonthYear(month, year) {
 setYAxis(highestFinder(data));
 
   
-},[prop.id, prop.date])
+},[prop.id, prop.date, prop.accountID])
 
   // prop.id --> instead of Zustand
   return (

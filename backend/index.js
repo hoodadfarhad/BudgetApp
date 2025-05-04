@@ -85,16 +85,32 @@ app.post('/api/figureCalc', async (req, res) => {
   
   // console.log( typeof(req.body.date.month));
   // console.log( (req.body.date.year));
+  console.log(req.body.accountID);
+  
 
-  const sum = await db.query(
+  const sum = req.body.accountID === undefined? 
+  
+  
+    await db.query(
+      `SELECT t.is_income, SUM(t.amount)
+       FROM transactions t
+       WHERE t.owner_id = $1 
+         AND EXTRACT(MONTH FROM t.date) = $2
+         AND EXTRACT(YEAR FROM t.date) = $3
+       GROUP BY t.is_income`,
+      [req.body.id, req.body.date.month, req.body.date.year ]
+    )
+  :
+  await db.query(
     `SELECT t.is_income, SUM(t.amount)
      FROM transactions t
      WHERE t.owner_id = $1 
        AND EXTRACT(MONTH FROM t.date) = $2
        AND EXTRACT(YEAR FROM t.date) = $3
+       AND account_id = $4
      GROUP BY t.is_income`,
-    [req.body.id, req.body.date.month, req.body.date.year ]
-  );
+    [req.body.id, req.body.date.month, req.body.date.year, req.body.accountID ]
+  ) 
   
   //  console.log(sum.rows);
   
@@ -117,7 +133,9 @@ let all3Combined = [];
 
   for (let i = 0; i < 3; i++) {
     
-    let sum = await db.query(
+    let sum = req.body.accountID === undefined? 
+    
+    await db.query(
       `SELECT 
     t.is_income, SUM(t.amount)
   FROM transactions t
@@ -125,7 +143,18 @@ let all3Combined = [];
     AND (EXTRACT(MONTH FROM t.date) = $2 AND EXTRACT(YEAR FROM t.date) = $3)
   GROUP BY t.is_income;`,
   [req.body.id, inputMonth-i, inputYear]
-  );
+  )
+  :
+  await db.query(
+    `SELECT 
+  t.is_income, SUM(t.amount)
+FROM transactions t
+WHERE t.owner_id = $1 
+  AND (EXTRACT(MONTH FROM t.date) = $2 AND EXTRACT(YEAR FROM t.date) = $3)
+  AND account_id= $4
+GROUP BY t.is_income;`,
+[req.body.id, inputMonth-i, inputYear, req.body.accountID]
+) 
 // console.log(sum.rows);
 
 all3Combined.push(
@@ -153,7 +182,9 @@ app.post('/api/getCatAmount', async (req, res) => {
 
   // console.log("this got called");
 
-  const PieRecord = await db.query(
+  const PieRecord = req.body.accountID === undefined? 
+  
+  await db.query(
     `SELECT SUM(t.amount) AS total, c.name AS category_name
      FROM transactions t
      INNER JOIN categories c ON c.id = t.category_id
@@ -162,7 +193,19 @@ app.post('/api/getCatAmount', async (req, res) => {
        AND EXTRACT(YEAR FROM t.date) = $3
      GROUP BY c.name`,
     [req.body.id, req.body.date.month, req.body.date.year]
-  );
+  )
+  :
+  await db.query(
+    `SELECT SUM(t.amount) AS total, c.name AS category_name
+     FROM transactions t
+     INNER JOIN categories c ON c.id = t.category_id
+     WHERE t.owner_id = $1 AND t.is_income = false
+       AND EXTRACT(MONTH FROM t.date) = $2
+       AND EXTRACT(YEAR FROM t.date) = $3
+       AND account_id= $4
+     GROUP BY c.name`,
+    [req.body.id, req.body.date.month, req.body.date.year, req.body.accountID]
+  )
   
 
   //  console.log(PieRecord.rows);
@@ -173,7 +216,9 @@ app.post('/api/getCatAmount', async (req, res) => {
 
 app.post('/api/getAllTransactions', async (req, res) => {
 
-  const history = await db.query(
+  const history = req.body.accountID === undefined?
+  
+  await db.query(
     `SELECT 
         t.amount,
         t.date,
@@ -194,7 +239,31 @@ app.post('/api/getAllTransactions', async (req, res) => {
       ORDER BY t.date DESC`,
     [req.body.id, req.body.date.month, req.body.date.year ]
     
-  );
+  )
+  :
+  await db.query(
+    `SELECT 
+        t.amount,
+        t.date,
+        t.is_income,
+        t.description,
+        c.name AS category_name,
+        a.name AS account_name,
+        t.id
+      FROM transactions t
+      LEFT JOIN categories c ON t.category_id = c.id
+      LEFT JOIN accounts a ON t.account_id = a.id
+      WHERE 
+        t.owner_id = $1 AND 
+        c.owner_id = $1 AND 
+        a.owner_id = $1 AND
+        EXTRACT(MONTH FROM t.date) = $2 AND 
+        EXTRACT(YEAR FROM t.date) = $3 AND
+        account_id = $4
+      ORDER BY t.date DESC`,
+    [req.body.id, req.body.date.month, req.body.date.year, req.body.accountID]
+    
+  ) 
 
   //  console.log(history.rows);
   

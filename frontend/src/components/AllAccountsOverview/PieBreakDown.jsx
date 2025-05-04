@@ -47,7 +47,7 @@ useEffect (() => {
         const res = await fetch("http://localhost:5001/api/getCatAmount", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: prop.id, date: prop.date }),
+            body: JSON.stringify({ id: prop.id, date: prop.date,  accountID: prop.accountID }),
           });
 
           const CatAmount = await res.json();
@@ -65,7 +65,7 @@ catGetter();
 
 
 
-},[prop.id, prop.date])
+},[prop.id, prop.date, prop.accountID])
 // console.log("john cena");
 
 // console.log(categories);

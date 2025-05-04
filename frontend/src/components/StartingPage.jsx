@@ -19,7 +19,8 @@ function StartingPage(prop) {
     isIncome: true,
     description: "TBD",
     amount: 0,
-    modifiedRow: -1
+    modifiedRow: -1,
+    transEditRequested: false
   })
  
 
@@ -61,7 +62,7 @@ function StartingPage(prop) {
            {
             console.log("AccNum by Clicking: " + accNumber);
             
-            return <OverviewEach accNumber={accNumber} />;
+            return <OverviewEach accNumber={accNumber} setModifyExpData={setModifyExpData} setClickedOption={setClickedOption}/>;
           }
         
         break;

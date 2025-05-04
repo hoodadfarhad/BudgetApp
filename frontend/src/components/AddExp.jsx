@@ -12,13 +12,15 @@ import useAccountStore from './useAccountsStore';
 function Expenses(prop) {
   const [category, setCategory] = useState([
   ]);
+
+  const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const { cardArr } = useAccountStore();
 
   useEffect(() => {
     categoryGetter();
 
 
-if (prop.modifyExpData.account !== "TBD") {
+if (prop.modifyExpData.transEditRequested === true) { 
   setState({
     name1: prop.modifyExpData.account ,
     name2: prop.modifyExpData.category
@@ -26,8 +28,10 @@ if (prop.modifyExpData.account !== "TBD") {
   setFee(prop.modifyExpData.amount);
   setDescription(prop.modifyExpData.description);
   setDate(prop.modifyExpData.date);
-  setIsIncome(prop.modifyExpData.isIncome)
+  setIsIncome(prop.modifyExpData.isIncome);
+  setShowDeleteBtn(true);
 }
+
 
 return () =>{
   resetModifyExpData();
@@ -58,7 +62,7 @@ function resetModifyExpData() {
       amount: "",
       modifiedRow: -1
     })
-  
+    setShowDeleteBtn(false);
     // setIsIncome(false);
     // setDate("");
     // setState({ name1: "Select Account",
@@ -326,6 +330,14 @@ Transaction Description
             <button type="submit" className="btn btn-primary mt-2">
               Submit
             </button>
+
+          { showDeleteBtn ?  <button className="btn btn-danger mt-2" onClick={() => {
+                        setShowModal(true);
+                      }}>
+              Delete
+            </button>
+            :
+            null}
           </div>
         </form>
       )}
