@@ -309,10 +309,19 @@ app.post('/api/getAllTransactions', async (req, res) => {
   });
 
 
+app.post('/api/deleteTransaction', async (req,res)=>{
 
+  const result = await db.query(
+    `DELETE FROM transactions WHERE id = $1`,
+    [req.body.modifiedRow]
+  );
+
+
+  res.status(201).json({ message: "Transaction deleted!"});
+})
 
 app.post('/api/AddUpdateTransaction', async (req, res) => {
-    // console.log("reqqq receiveeed");
+    console.log("new add mr received khan");
     
     // console.log(req.body);
 

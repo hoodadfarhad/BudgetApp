@@ -33,6 +33,9 @@ if (prop.modifyExpData.transEditRequested === true) {
 }
 
 
+
+
+
 return () =>{
   resetModifyExpData();
 };
@@ -49,6 +52,7 @@ return () =>{
   const [showModal, setShowModal] = useState(false);
   const [fee, setFee] = useState("");
   const [description, setDescription] = useState("");
+  const [delConfirm, setDelConfirm] = useState(false);
   const { userID, setUserID } = useUserStore();
 
 function resetModifyExpData() {
@@ -119,7 +123,34 @@ function resetModifyExpData() {
   }
 
 
-
+  async function handleDelete(event) {
+    // console.log("was it run?");
+    
+    const confirmed = window.confirm("Are you sure you want to delete this item?");
+    if (confirmed) {
+      // event.preventDefault();
+        const transactionDataToDelete = {
+          modifiedRow: prop.modifyExpData.modifiedRow
+        };
+        // console.log(" Sending userID:", transactionDataToSendBack.account);
+  
+    const res = await fetch("http://localhost:5001/api/deleteTransaction", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(transactionDataToDelete),
+    });
+    const result = await res.json();
+    console.log(result);
+    if (res.ok) {
+      
+      alert("Transaction Deleted!");
+    } else {
+      alert("Something went wrong.");
+    }
+  
+      stateReset();
+    }
+  }
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -331,9 +362,7 @@ Transaction Description
               Submit
             </button>
 
-          { showDeleteBtn ?  <button className="btn btn-danger mt-2" onClick={() => {
-                        setShowModal(true);
-                      }}>
+          { showDeleteBtn ?  <button className="btn btn-danger mt-2" onClick={() => handleDelete()}>
               Delete
             </button>
             :
