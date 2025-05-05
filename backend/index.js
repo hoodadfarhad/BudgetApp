@@ -309,6 +309,29 @@ app.post('/api/getAllTransactions', async (req, res) => {
   });
 
 
+
+  app.post('/api/cardTransactions', async (req,res)=>{
+
+     await db.query(
+      `UPDATE accounts
+      SET new_balance = (
+      SELECT 
+      COALESCE((SELECT balance FROM accounts WHERE accounts.id = $2), 0)
+      +
+      COALESCE((SELECT sum(amount) FROM transactions WHERE is_income = true AND owner_id = $1 AND account_id = $2), 0)
+      - 
+      COALESCE((SELECT sum(amount) FROM transactions WHERE is_income = false AND owner_id = $1 AND account_id = $2), 0)
+    )
+      WHERE accounts.id = $2`,      [req.body.id, req.body.accountID]
+    );
+
+    const result =  await db.query('SELECT new_balance from accounts WHERE accounts.id = $1', [req.body.accountID]);
+  
+  console.log(result.rows[0].new_balance);
+  
+    res.status(201).json({new_balance: result.rows[0].new_balance});
+  })
+
 app.post('/api/deleteTransaction', async (req,res)=>{
 
   const result = await db.query(

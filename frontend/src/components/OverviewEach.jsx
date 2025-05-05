@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import CurrentMonth from "./AllAccountsOverview/CurrentMonth";
 import CompareMonths from "./AllAccountsOverview/CompareMonths";
@@ -20,14 +20,46 @@ const [date, setDate] = useState({
         month: t.getMonth() + 1,
         year: t.getFullYear()
       })
+      const [newBalance, setNewBalance] = useState(0)
+
+  function handleModify() {
+    prop.setModifyCardData({
+
+      accountName: "avaz shode zibaaa",
+      bankName: "avazi AHHH",
+      balance: "85698569",
+          cardEditRequested: true
+        })
+    prop.setClickedOption(3);
+  }    
+
+
+useEffect(() => {
+  // console.log(history);
+  async function balanceCalc() {
+    const res = await fetch("http://localhost:5001/api/cardTransactions", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: userID, accountID: prop.accNumber }),
+    });
+    const finalBalance = await res.json();
+
+    
+    setNewBalance(finalBalance.new_balance);
+  
+  }
+
+  balanceCalc();
+}, [userID, prop.accNumber]);
+
 
 
   return (
     <div>
     //use the Zustand global state cardArr .balance and .id to pull relevant data from db
     <h1>Account name: {cardArr.find(item => item.id === prop.accNumber)?.name}</h1>
-    <h2>Total Balance: {cardArr.find(item => item.id === prop.accNumber)?.balance}</h2>
-    <Button>Modify Account</Button>
+    <h2>Total Balance: {newBalance}</h2>
+    <Button onClick={handleModify}>Modify Account</Button>
     <div className="allAcc">
       <div className="firstRow">
       <h1 >In the month of <DatePickerFunc dateAtAllAcc={setDate}/>

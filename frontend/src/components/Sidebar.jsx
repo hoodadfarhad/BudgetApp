@@ -52,7 +52,7 @@ function Sidebar(prop) {
           </button>
           <div class="collapse" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-              <Cards cardSelector={prop.optionSelector} accNumber={prop.accNumber} setAccNumber={prop.setAccNumber} />
+              <Cards cardSelector={prop.optionSelector} accNumber={prop.accNumber} setAccNumber={prop.setAccNumber} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} />
             </ul>
           </div>
         </li>

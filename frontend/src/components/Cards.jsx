@@ -38,12 +38,12 @@ setCardArr(cardInfo);
 
   return (
     <div>
-      <AddNewCard cardSelector={prop.cardSelector} />
+      <AddNewCard cardSelector={prop.cardSelector} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} />
       {cardArr.map((inp, idx) => (
         <ExistingCard
           name={inp.name} 
           cardID={inp.id}
-          // cardBalance={inp.balance}
+          cardBalance={inp.balance}
           accNumber={prop.accNumber} 
           setAccNumber={prop.setAccNumber}
           key={idx}

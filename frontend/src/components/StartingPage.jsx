@@ -22,10 +22,17 @@ function StartingPage(prop) {
     modifiedRow: -1,
     transEditRequested: false
   })
+  const [modifyCardData, setModifyCardData] = useState({
+
+accountName: "",
+bankName: "",
+balance: "",
+    cardEditRequested: false
+  })
  
 
   
-  console.log(prop.googleInfo);
+  // console.log(prop.googleInfo);
   
   
 
@@ -54,15 +61,15 @@ function StartingPage(prop) {
         break;
     
       case 3:
-        return <NewCardPanel />;
+        return <NewCardPanel modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} />;
         break;
 
       // card component goes here:
         default:
            {
-            console.log("AccNum by Clicking: " + accNumber);
+            // console.log("AccNum by Clicking: " + accNumber);
             
-            return <OverviewEach accNumber={accNumber} setModifyExpData={setModifyExpData} setClickedOption={setClickedOption}/>;
+            return <OverviewEach accNumber={accNumber} setModifyExpData={setModifyExpData} setClickedOption={setClickedOption} setModifyCardData={setModifyCardData}/>;
           }
         
         break;
@@ -79,7 +86,7 @@ function StartingPage(prop) {
       <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} />
 
       <div className="mainPage">
-        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} />
+        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData}/>
         {WhatToRender(clickedOption)}
       </div>
     </div>

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
+import useCardEditStore from "./useCardEditStore";
 
 
 
@@ -10,6 +11,7 @@ function NewCardPanel(prop) {
     bank: "",
     balance:""
   })
+  const { controller, setController } = useCardEditStore();
 
   const { userID, setUserID } = useUserStore();
 
@@ -22,11 +24,43 @@ function NewCardPanel(prop) {
 
   }
 
+
+useEffect(() => {
+
+  if (prop.modifyCardData.cardEditRequested === true) {
+    setAccountInfo({
+      name: prop.modifyCardData.accountName,
+      bank: prop.modifyCardData.bankName,
+      balance: prop.modifyCardData.balance
+  })
+  }
+
+// console.log(controller);
+
+  return () =>{
+    setAccountInfo({
+      name: "",
+      bank: "",
+      balance: ""
+  })
+    prop.setModifyCardData((prev)=>({
+      ...prev,
+      cardEditRequested: false
+    }))
+    setController(false);
+  };
+
+
+}, [controller]); // we are constantly on NewCardPanel component when we are modifying a card, or hit on Add new in the side bar. controller will now give the system a clue that the purpose has changed on the still same component, and the return parts getsw run, which makes the text in each input box go away
+
  async function newAccount(event) {
 
 
   
   event.preventDefault(); // prevent form from refreshing the page
+
+
+  if (prop.modifyCardData.cardEditRequested === false) {   // this is a new account then
 
   console.log("New account from front:", accountInfo);
 
@@ -35,9 +69,16 @@ function NewCardPanel(prop) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ info: accountInfo, owner_id: userID })
   })
-
   const data = await res.json();
   console.log(data);
+ }
+ else{
+  //onSubmit tu halate edit update kon. jayi ke modifyCard tu db hast ro ba accountInfo update kon
+ }
+
+
+  
+
   
 
   }
@@ -50,7 +91,7 @@ function NewCardPanel(prop) {
     <div className="newCardInput">
       <form className="form-width" onSubmit={newAccount}>
         <div className="mb-3">
-          <label for="exampleFormControlInput1" className="form-label">
+          <label for="exampleFormControlInput1" className="form-label" >
             Account Name:
           </label>
           <input
