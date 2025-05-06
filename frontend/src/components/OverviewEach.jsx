@@ -14,6 +14,7 @@ function OverviewEach(prop) {
 
   const { userID } = useUserStore();
   const { cardArr, setCardArr } = useAccountStore();
+// console.log(cardArr);
 
   const t = new Date();
 const [date, setDate] = useState({
@@ -25,9 +26,9 @@ const [date, setDate] = useState({
   function handleModify() {
     prop.setModifyCardData({
 
-      accountName: "avaz shode zibaaa",
-      bankName: "avazi AHHH",
-      balance: "85698569",
+      accountName: cardArr.find(item => item.id === prop.accNumber)?.name.split(" ")[1],
+      bankName: cardArr.find(item => item.id === prop.accNumber)?.name.split(" ")[0],
+      balance: cardArr.find(item => item.id === prop.accNumber)?.balance,
           cardEditRequested: true
         })
     prop.setClickedOption(3);
@@ -56,7 +57,6 @@ useEffect(() => {
 
   return (
     <div>
-    //use the Zustand global state cardArr .balance and .id to pull relevant data from db
     <h1>Account name: {cardArr.find(item => item.id === prop.accNumber)?.name}</h1>
     <h2>Total Balance: {newBalance}</h2>
     <Button onClick={handleModify}>Modify Account</Button>

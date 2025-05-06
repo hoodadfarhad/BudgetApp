@@ -61,7 +61,7 @@ balance: "",
         break;
     
       case 3:
-        return <NewCardPanel modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} />;
+        return <NewCardPanel modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} accNumber={accNumber} />;
         break;
 
       // card component goes here:

@@ -274,8 +274,8 @@ app.post('/api/getAllTransactions', async (req, res) => {
   app.post('/api/accountsGetter', async (req, res) => {
 
     const existingAccounts = await db.query(
-      `SELECT id, name, balance FROM accounts WHERE owner_id=$1`,
-      [req.body.owner_id]
+      `SELECT id, name, new_balance FROM accounts WHERE owner_id=$1 AND to_show=$2`,
+      [req.body.owner_id, true]
     );
     
     res.json({ existingAccounts: existingAccounts.rows });
@@ -295,6 +295,49 @@ app.post('/api/getAllTransactions', async (req, res) => {
 
     res.status(201).json({ message: "account added!", resultAddingAccount: resultAddingAccount.rows[0] });
   });
+
+
+
+  app.post('/api/updateAccountInfo', async (req, res) => {
+  
+
+    // initial balance = updatedBalance - interCalc
+  const res1 =  await db.query(
+      `SELECT
+      COALESCE((SELECT sum(amount) FROM transactions WHERE is_income = true AND owner_id = $1 AND account_id = $2), 0)
+      - 
+      COALESCE((SELECT sum(amount) FROM transactions WHERE is_income = false AND owner_id = $1 AND account_id = $2), 0)
+      AS interCalc`,
+      [ req.body.owner_id, req.body.accountID]
+    )
+  console.log("meghdar tashkilat: "+ parseInt(res1.rows[0].intercalc));
+  
+  let interCalc = parseInt(res1.rows[0].intercalc);
+  let  updatedBalance = req.body.info.balance
+    let newSyncing = updatedBalance - interCalc;
+    const resultUpdatingAccount = await db.query(
+      `UPDATE accounts 
+      SET name=$1,
+      balance=$2
+      WHERE owner_id = $3 AND id= $4`,
+      [req.body.info.bank + " " + req.body.info.name, newSyncing , req.body.owner_id, req.body.accountID]
+    );
+
+
+    res.status(201).json({ message: "account updated!", resultUpdatingAccount: resultUpdatingAccount.rows[0] });
+  });
+
+
+
+
+
+
+
+
+
+
+
+
 
   app.post('/api/getCategories', async (req, res) => {
 
@@ -343,8 +386,18 @@ app.post('/api/deleteTransaction', async (req,res)=>{
   res.status(201).json({ message: "Transaction deleted!"});
 })
 
+
+
+
+
+
+
+
+
+
+
 app.post('/api/AddUpdateTransaction', async (req, res) => {
-    console.log("new add mr received khan");
+    // console.log("new add mr received khan");
     
     // console.log(req.body);
 
@@ -437,6 +490,28 @@ WHERE name = $1 AND owner_id = $2;
 
     res.status(201).json({ message: "hid!", resultremovingCat: resultremovingCat.rows[0] });
   });
+
+  app.post('/api/deleteAccountInfo', async (req, res) => {
+    // console.log("req for deleting cat receiveeed");
+    
+    // console.log(req.body.name);
+
+    const resultHidingAccount = await db.query(
+      `UPDATE accounts
+SET to_show = false
+WHERE id = $1 AND owner_id = $2;
+`,
+      [req.body.accountID, req.body.owner_id]
+    );
+
+
+    res.status(201).json({ message: "hid!", resultHidingAccount: resultHidingAccount.rows[0] });
+  });
+
+
+
+
+  
 
 
 

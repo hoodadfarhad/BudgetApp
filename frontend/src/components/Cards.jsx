@@ -22,11 +22,11 @@ function Cards(prop) {
         const cardInfo = data.existingAccounts.map((item) => ({
           name: item.name,
           id: item.id,
-          balance: item.balance
+          balance: item.new_balance
         }));
 setCardArr(cardInfo);
 
-      //  console.log(cardArr);
+    
         
 
     }

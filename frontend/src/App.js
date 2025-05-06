@@ -1,6 +1,7 @@
 import "./styles.css";
 import React, { useState, useEffect } from "react";
-import Route2 from "./components/RouterTest";
+import About from "./components/RouterTest";
+import Contact from "./components/Contact";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/login";
 import useUserStore from "./components/useUserStore";
@@ -58,8 +59,9 @@ useEffect(() => {
   return (
     <div>
       <Routes>
-        <Route path="/about" element={<Route2 />} />
-        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} /> : <Route2/>} />
+      <Route path="/contact" element={<Contact googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated}/>} />
+        <Route path="/about" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated}/>} />
+        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} /> : <About/>} />
         <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} />} />
       </Routes>
     </div>

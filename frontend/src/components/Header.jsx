@@ -22,7 +22,7 @@ function logOutHandle(params) {
                   <Link to="/about" className="nav-link">
                     About
                   </Link>
-                  <Link to="/about" className="nav-link">
+                  <Link to="/contact" className="nav-link">
                     Contact
                   </Link>
                 </div>
@@ -31,7 +31,7 @@ function logOutHandle(params) {
 
             <div className="text-end">
              
-                {prop.googleInfo ? <div><h4>Welcome  {prop.googleInfo.fname}!</h4> <button type="button" onClick={logOutHandle} className="btn btn-warning"><Link to="/" className="nav-link">
+                {prop.isAuth ? <div><h4>Welcome  {prop.googleInfo.fname}!</h4> <button type="button" onClick={logOutHandle} className="btn btn-warning"><Link to="/" className="nav-link">
                 LogOut
                 </Link>
               </button> </div>: <button type="button" className="btn btn-warning"><Link to="/login" className="nav-link">
