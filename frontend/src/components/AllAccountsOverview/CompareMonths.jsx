@@ -117,9 +117,10 @@ setYAxis(highestFinder(data));
 
   // prop.id --> instead of Zustand
   return (
-    <div className="">
-      <h1>compare months</h1>
-      <ResponsiveContainer width="100%" height={300}>
+    <div>
+      <h2>Compare Months</h2>
+      <div  className="chart" style={{marginBottom:"45px"}}>
+      <ResponsiveContainer width="100%" height= {320} >
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
@@ -130,7 +131,8 @@ setYAxis(highestFinder(data));
           <Line type="monotone" dataKey="expenses" stroke="#ff6961" />
         </LineChart>
       </ResponsiveContainer>
-    </div>
+      </div>
+      </div>
   );
 }
 

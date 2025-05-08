@@ -10,33 +10,47 @@ function AllAccounts(prop) {
   const { userID } = useUserStore();
 
 
-  const t = new Date();
 
-  const [date, setDate] = useState({
-        month: t.getMonth() + 1,
-        year: t.getFullYear()
-      })
     
-// useEffect(()=>{
-//   console.log(date);
   
-// },[date] )
+  const [isBigScreen, setIsBigScreen] = useState(false);
+
+
+  // Detect screen size
+
+  useEffect(() => {
+    const mediaQueryForAll = window.matchMedia("(max-width: 1000px)");
+
+    const handleResizeForBig = () => {
+      setIsBigScreen(!mediaQueryForAll.matches); // // if it matched, then switch the state to false to hide the side bar
+    };
+
+    mediaQueryForAll.addEventListener("change", handleResizeForBig);
+    handleResizeForBig(); // run once on load
+
+    return () => mediaQueryForAll.removeEventListener("change", handleResizeForBig);
+  }, []);
    
 
   return (
 <div className="overview">
-    <div className="firstRow">
-      <h1 >In the month of <DatePickerFunc dateAtAllAcc={setDate}/>
+    
+
+    { isBigScreen? null:
+<div className="firstRow">
+      <h1 >In the month of <DatePickerFunc dateAtAllAcc={prop.setDate}/>
 :  </h1>
 
       </div>
+}
     <div className="allAcc">
+   
       
-      
-      <CurrentMonth id={userID} date={date}/>
-      <CompareMonths id={userID} date={date}/>    
-        <RecentTransactions id={userID} date={date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData}/>
-        <PieBreakDown id={userID} date={date}/>
+      <CurrentMonth id={userID} date={prop.date} />
+      <CompareMonths id={userID} date={prop.date} />   
+      <PieBreakDown id={userID} date={prop.date} /> 
+        <RecentTransactions id={userID} date={prop.date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} />
+       
       
     </div>
     </div>

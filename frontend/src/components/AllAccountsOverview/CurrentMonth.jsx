@@ -53,18 +53,8 @@ useEffect(()=>{
       expenses: calcResult.find(item => item.is_income == false)?.sum || 0,
     }))
 
-
-
-  
-    
-    
-    
   }
  
-  
-
-
-
 
   historyCalc();
   
@@ -77,8 +67,12 @@ useEffect(()=>{
 
   return (
     <div>
-      <h1>Total spend</h1>
-      <ResponsiveContainer width="100%" height={300}>
+      <h2>Total Spend</h2>
+
+
+      <div  className="chart" style={{marginBottom:"90px"}}>
+
+      <ResponsiveContainer width="100%" height={320}>
      
         <BarChart data={[sums]}>
           <CartesianGrid strokeDasharray="1 1" />
@@ -90,6 +84,7 @@ useEffect(()=>{
           <Bar dataKey="expenses" fill="#ff6961" />
         </BarChart>
       </ResponsiveContainer>
+    </div>
     </div>
   );
 }

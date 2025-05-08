@@ -77,10 +77,22 @@ catGetter();
 
   return (
 
-    <div style={{ width: "100%", height: 300, marginTop:35  }}>
 
-      {categories.length === 0 ? <h2>No record found.</h2>: 
-      <ResponsiveContainer>
+    <div>
+      <h2 className="pieH2">Category BreakDown</h2>
+    <div className="chart" style={{marginBottom:"80px"}}>
+
+
+
+
+      {categories.length === 0 ? <h2 style={{marginTop: 60}}>No record found.</h2>: 
+      
+
+      <ResponsiveContainer  width= "100%" height={320} >
+      
+
+
+        
         <PieChart>
           <Pie
             data={categories}
@@ -98,9 +110,11 @@ catGetter();
           <Tooltip />
           <Legend />
         </PieChart>
-      </ResponsiveContainer> }
+      </ResponsiveContainer>
+     
+      } </div>  </div>
       
-    </div>
+    
   );
 }
 

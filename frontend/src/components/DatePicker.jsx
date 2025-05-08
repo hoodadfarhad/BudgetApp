@@ -28,7 +28,7 @@ import dayjs from 'dayjs';
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
     <DatePicker
-      label="Select Month and Year"
+     
       views={['year', 'month']}
       value={value}
       onChange={dateSetter}
@@ -37,8 +37,31 @@ import dayjs from 'dayjs';
       slotProps={{
         textField: {
           helperText: null,
+          size: "small",
+          variant: "outlined", 
+          sx: {
+            backgroundColor: "#ffffff", // light yellow
+            borderRadius: "8px",
+            input: {
+              color: "#ffffff", // text color
+              fontWeight: "bold",
+            },
+           
+            "& .MuiOutlinedInput-root": {
+              "& fieldset": {
+                borderColor: "#183B4E",
+              },
+              "&:hover fieldset": {
+                borderColor: "#DDA853",
+              },
+              "&.Mui-focused fieldset": {
+                borderColor: "#DDA853",
+              },
+            },
+          },
         },
       }}
+        
     />
   </LocalizationProvider>
   );

@@ -17,6 +17,14 @@ const [fetchedGoogleInfo, setFetchedGoogleInfo] = useState({
   email: ""
 })
 
+const [showSidebar, setShowSidebar] = useState(true);
+const [isSmallScreen, setIsSmallScreen] = useState(false);
+
+
+// Detect screen size
+
+
+
 useEffect(() => {
   async function authChecker() {
     const res = await fetch("http://localhost:5001/auth/infoGetter", {
@@ -53,15 +61,32 @@ useEffect(() => {
   }
 
   authChecker();
+  const mediaQuery = window.matchMedia("(max-width: 1000px)");
+
+  const handleResize = () => {
+    setIsSmallScreen(mediaQuery.matches);
+    setShowSidebar(!mediaQuery.matches);
+
+  };
+
+  mediaQuery.addEventListener("change", handleResize);
+  handleResize(); // Run on initial load
+
+  return () => mediaQuery.removeEventListener("change", handleResize);
+  
 }, []);
 
 
+
+
+
+
   return (
-    <div>
+    <div className="App">
       <Routes>
-      <Route path="/contact" element={<Contact googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated}/>} />
-        <Route path="/about" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated}/>} />
-        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} /> : <About/>} />
+      <Route path="/contact" element={<Contact googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
+        <Route path="/about" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
+        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}  /> : <About/>} />
         <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} />} />
       </Routes>
     </div>

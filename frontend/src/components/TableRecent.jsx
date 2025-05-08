@@ -89,7 +89,7 @@ useEffect(() => {
   }
 
   return (
-    <div className="table-responsive tableHeight">
+    <div className="table-responsive tableHeight ">
       <table className="table table-bordered">
         <thead className="table-dark">
           <tr>

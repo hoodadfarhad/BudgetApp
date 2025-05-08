@@ -1,5 +1,6 @@
 import React from "react";
 import Header from "./Header";
+import { useNavigate } from "react-router-dom";
 
 function Contact(prop) {
   console.log("contact: " + prop.isAuth);
@@ -8,14 +9,130 @@ function Contact(prop) {
     alert("Taking you to my GitHub; see you there!");
   };
 
+    const navigate = useNavigate();
+
   return (
     <div>
       <Header
         googleInfo={prop.googleInfo}
         isAuth={prop.isAuth}
         setIsAuth={prop.setIsAuth}
+        showSidebar={prop.showSidebar} 
+        setShowSidebar={prop.setShowSidebar} 
+        isSmallScreen={prop.isSmallScreen}
       /> 
+      {!prop.showSidebar && (
+        <button
+          onClick={() => prop.setShowSidebar(true)}
+          className="btn btn-primary"
+          style={{
+            position: "fixed",
+            bottom: "40px",
+            left: "40px",
+            zIndex: 10,
+          }}
+        >
+          ☰ Menu
+        </button>
+      )}
       
+      {prop.isSmallScreen && (
+     <> 
+    {prop.showSidebar &&  (<div
+      className="d-flex flex-column flex-shrink-0  p-3 sidebar"
+      style={{ width: "280px"}}
+    >
+      
+        
+            <button
+              onClick={() => prop.setShowSidebar(false)}
+              className="btn btn-sm btn-light"
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                zIndex: 25,
+              }}
+            >
+              ✕
+            </button>
+              <span className="fs-4" style={{color:"white"}}>Menu</span>
+              <hr/>
+
+
+
+              <ul className="nav nav-pills flex-column mb-auto">
+
+
+        
+
+<li className="mb-1">
+            <button
+              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+              onClick={() => {
+                prop.setShowSidebar(false);
+                navigate("/")
+              }}
+            >
+              Dashboard
+            </button>
+  
+          </li>
+
+
+
+
+            <li className="mb-1">
+            <button
+              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+              onClick={() => {
+                console.log(prop.showSidebar);
+                prop.setShowSidebar(false);
+               navigate("/about")
+              }}
+            >
+              About
+            </button>
+  
+          </li>
+
+          <li className="mb-1">
+            <button
+              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+              onClick={() => {
+                prop.setShowSidebar(false);
+                navigate("/contact")
+              }}
+            >
+              Contact
+            </button>
+  
+          </li>
+          <hr />
+    
+      </ul>
+
+
+
+
+
+             
+
+        
+          
+
+
+        
+
+
+     
+
+
+
+    </div>)}
+    </>
+      )}
+
       <div className="secondary container" id="contact">
         <h1>Contact us</h1>
         <p id="contactP">For any inquiries, please contact me!</p>
@@ -52,6 +169,7 @@ function Contact(prop) {
           </ul>
         </div>
       </div>
+      
     </div>
   );
 }

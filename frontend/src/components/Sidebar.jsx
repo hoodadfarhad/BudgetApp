@@ -1,30 +1,15 @@
 import React, { useState, useEffect } from "react";
 import Cards from "./Cards";
 import { Link } from "react-router-dom";
+import DatePickerFunc from "./DatePicker";
+import { useNavigate } from "react-router-dom";
+
 
 function Sidebar(prop) {
 
 
 
-  const [showSidebar, setShowSidebar] = useState(true);
-  const [isSmallScreen, setIsSmallScreen] = useState(false);
-
-
-  // Detect screen size
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 1000px)");
-
-    const handleResize = () => {
-      setIsSmallScreen(mediaQuery.matches);
-      setShowSidebar(!mediaQuery.matches); // // if it matched, then switch the state to false to hide the side bar
-    };
-
-    mediaQuery.addEventListener("change", handleResize);
-    handleResize(); // run once on load
-
-    return () => mediaQuery.removeEventListener("change", handleResize);
-  }, []);
+  const navigate = useNavigate();
 
 
 
@@ -33,9 +18,9 @@ function Sidebar(prop) {
   return (
 
 <>
-{!showSidebar && (
+{!prop.showSidebar && (
         <button
-          onClick={() => setShowSidebar(true)}
+          onClick={() => prop.setShowSidebar(true)}
           className="btn btn-primary"
           style={{
             position: "fixed",
@@ -48,13 +33,13 @@ function Sidebar(prop) {
         </button>
       )}
 
-{showSidebar && (<div
-      className="d-flex flex-column flex-shrink-0  p-3 text-bg-dark sidebar"
+{prop.showSidebar && (<div
+      className="d-flex flex-column flex-shrink-0  p-3 sidebar"
       style={{ width: "280px"}}
     >
-       {isSmallScreen && (
+       {prop.isSmallScreen && (
             <button
-              onClick={() => setShowSidebar(false)}
+              onClick={() => prop.setShowSidebar(false)}
               className="btn btn-sm btn-light"
               style={{
                 position: "absolute",
@@ -65,16 +50,36 @@ function Sidebar(prop) {
             >
               ✕
             </button>
+            
+          )}
+          
+
+
+          <span className="fs-4" style={{color:"white"}}>Menu</span>
+          <hr/>
+
+          {!prop.isSmallScreen && (
+            <div className="firstRow">
+                 
+            <h3 className="fs-4" >In the month of: <DatePickerFunc dateAtAllAcc={prop.setDate}/>
+        </h3>
+      
+            </div>
           )}
 
-      <Link
-        to="/"
-        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-      >
-        <span className="fs-4">MENU</span>
-      </Link>
-      <hr />
+
+
+
+
+
+
+ 
       <ul className="nav nav-pills flex-column mb-auto">
+
+
+      
+
+
         <li className="mb-1">
           <button
             class="nav-link text-white btn-toggle rounded border-0 collapsed"
@@ -84,6 +89,7 @@ function Sidebar(prop) {
           >
             Overview
           </button>
+
         </li>
 
         <li>
@@ -115,6 +121,41 @@ function Sidebar(prop) {
             </ul>
           </div>
         </li>
+
+        {prop.isSmallScreen && (
+        <>
+            <li className="mb-1">
+            <button
+              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+              onClick={() => {
+                console.log(prop.showSidebar);
+                prop.setShowSidebar(false);
+               navigate("/about")
+              }}
+            >
+              About
+            </button>
+  
+          </li>
+
+          <li className="mb-1">
+            <button
+              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+              onClick={() => {
+                prop.setShowSidebar(false);
+                navigate("/contact")
+              }}
+            >
+              Contact
+            </button>
+  
+          </li>
+
+          
+          </>
+          )}
+
+
       </ul>
       <hr />
     </div>)}

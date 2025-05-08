@@ -10,7 +10,14 @@ import { Link } from "react-router-dom";
 
 function StartingPage(prop) {
   const [clickedOption, setClickedOption] = useState(0);
-  const [accNumber, setAccNumber] = useState(null)
+  const t = new Date();
+
+
+  const [date, setDate] = useState({
+        month: t.getMonth() + 1,
+        year: t.getFullYear()
+      })
+  const [accNumber, setAccNumber] = useState(null);
   const [modifyExpData,setModifyExpData] = useState({
     category: "TBD",
     account: "TBD",
@@ -29,6 +36,8 @@ balance: "",
     cardEditRequested: false
   })
  
+
+
 
   
   // console.log(prop.googleInfo);
@@ -52,7 +61,7 @@ balance: "",
   function WhatToRender(op) {
     switch (op) {
       case 0:
-        return <Overview setClickedOption={setClickedOption} setModifyExpData={setModifyExpData} />;
+        return <Overview setClickedOption={setClickedOption} setModifyExpData={setModifyExpData} date={date} setDate={setDate} />;
         break;
 
       case 1:
@@ -82,10 +91,10 @@ balance: "",
 
   return (
     <div className="App">
-      <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} />
+      <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} isSmallScreen={prop.isSmallScreen}/>
 
       <div className="mainPage">
-        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData}/>
+        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} setDate={setDate} showSidebar={prop.showSidebar} setShowSidebar={prop.setShowSidebar} isSmallScreen={prop.isSmallScreen}/>
         {WhatToRender(clickedOption)}
       </div>
     </div>
