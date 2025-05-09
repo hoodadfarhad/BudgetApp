@@ -5,6 +5,7 @@ import DropDown from "./DropDown";
 import CategoryModal from "./CategoryModal";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
 import useAccountStore from './useAccountsStore';
+import useCardEditStore from "./useCardEditStore";
 
 
  
@@ -12,7 +13,7 @@ import useAccountStore from './useAccountsStore';
 function Expenses(prop) {
   const [category, setCategory] = useState([
   ]);
-
+  const { setController } = useCardEditStore();
   const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const { cardArr } = useAccountStore();
 
@@ -193,6 +194,7 @@ function resetModifyExpData() {
 
 
   return (
+    <div className="form-wrapper">
     <div className="addTransaction">
       {showModal ? (
         <CategoryModal
@@ -202,71 +204,16 @@ function resetModifyExpData() {
         />
       ) : (
         <form onSubmit={handleSubmit}>
-          <div className="container">
+     <div className="container-fluid">
             <div className="row rowMargin justify-content-around">
-              {/* 
 
-toggle-lable stack 
-
-*/}
-              <div className="col-md-6 form-check form-switch switchStack">
-                <label
-                  className="form-check-label"
-                  htmlFor="flexSwitchCheckChecked"
-                >
-                  Income?
-                </label>
-
-                <input
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckChecked"
-                  checked={isIncome}
-                  onChange={clickedIncome}
-                />
-              </div>
-
-              {/* 
-
-Drop Down for Accounts 
-
-*/}
-
-              <div className="col-md-6 dropdown">
-                <button
-                  className="btn btn-secondary dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  {state.name1}
-                </button>
-
-                <ul className="dropdown-menu dropdown-menu-dark">
-                  {cardArr.map((item, index) => {
-                    return (
-                      <DropDown
-                        items={item.name}
-                        key={index}
-                        setFace={setState}
-                        name="name1"
-                        optionSelector={prop.optionSelector}
-                      />
-                    );
-                  })}
-                </ul>
-              </div>
-            </div>
-
-            <div className="row rowMargin justify-content-around">
-              {/* 
+                            {/* 
 
 Drop Down for categories 
 
 */}
 
-              <div className="col-md-4 dropdown">
+<div className="col-md-4 col-12 mb-3 dropdown d-flex justify-content-center" >
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
@@ -298,6 +245,88 @@ Drop Down for categories
                     </a>
                   </li>
                 </ul>
+              </div>
+              
+              {/* 
+
+Drop Down for Accounts 
+
+*/}
+
+<div className="col-12 col-md-6 mt-3 mt-md-0  ">
+  <div className="dropdown w-100 d-flex justify-content-center">
+
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  {state.name1}
+                </button>
+
+                <ul className="dropdown-menu dropdown-menu-dark">
+                  {cardArr.map((item, index) => {
+                    return (
+                      
+                      <DropDown
+                        items={item.name}
+                        key={index}
+                        setFace={setState}
+                        name="name1"
+                     
+                      />
+                    
+                 
+                    );
+                  })}
+
+<li>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => {
+                        setController(true);
+                        prop.optionSelector(3);
+                      }}
+                    >
+                      Add New Account
+                    </a>
+                  </li>
+                </ul>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div className="row rowMargin justify-content-around">
+
+{/* 
+
+toggle-lable stack 
+
+*/}
+              <div className="col-12 col-md-3 d-flex align-items-center justify-content-center gap-3 incomeTrans" >
+                <label
+                  className="form-check-label"
+                  htmlFor="flexSwitchCheckChecked"
+                >
+                  Income?
+                </label>
+
+                <input
+                  className="form-check-input"
+                  type="checkbox"
+                  role="switch"
+                  id="flexSwitchCheckChecked"
+                  checked={isIncome}
+                  onChange={clickedIncome}
+                />
               </div>
 
               {/* 
@@ -345,7 +374,7 @@ Transaction Description
 
 */}
 
-              <div className="col-md-8 mb-3">
+<div className="col-12 mb-3">
                 <textarea
                   className="form-control"
                   id="exampleFormControlTextarea1"
@@ -359,18 +388,25 @@ Transaction Description
               </div>
             </div>
 
+            <div className="row justify-content-center gap-3">
+            <div className="col-auto">
             <button type="submit" className="btn btn-primary mt-2">
               Submit
             </button>
-
-          { showDeleteBtn ?  <button className="btn btn-danger mt-2" onClick={() => handleDelete()}>
+</div>
+          { showDeleteBtn ? 
+          <div className="col-auto">
+          <button className="btn btn-danger mt-2" onClick={() => handleDelete()}>
               Delete
             </button>
+            </div>
             :
             null}
+            </div>
           </div>
         </form>
       )}
+    </div>
     </div>
   );
 }
