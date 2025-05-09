@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import useCardEditStore from "./useCardEditStore";
 
 function DropDown(prop) {
+
+  const { setController } = useCardEditStore();
+
   function faceBtn(event) {
     prop.setFace((ghablia) => {
       return {
@@ -17,6 +21,17 @@ function DropDown(prop) {
           {prop.items}
         </a>
       </li>
+      <li>
+                    <a
+                      className="dropdown-item"
+                      onClick={() => {
+                        setController(true);
+                        prop.optionSelector(3);
+                      }}
+                    >
+                      Add New Account
+                    </a>
+                  </li>
     </div>
   );
 }

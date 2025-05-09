@@ -251,6 +251,7 @@ Drop Down for Accounts
                         key={index}
                         setFace={setState}
                         name="name1"
+                        optionSelector={prop.optionSelector}
                       />
                     );
                   })}

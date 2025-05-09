@@ -65,7 +65,7 @@ balance: "",
         break;
 
       case 1:
-        return <AddExpenses modifyExpData={modifyExpData} setModifyExpData={setModifyExpData} />;
+        return <AddExpenses modifyExpData={modifyExpData} setModifyExpData={setModifyExpData} optionSelector={SideBarResult} />;
         break;
     
       case 3:
