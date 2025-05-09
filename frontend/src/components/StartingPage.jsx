@@ -77,7 +77,7 @@ balance: "",
            {
             // console.log("AccNum by Clicking: " + accNumber);
             
-            return <OverviewEach accNumber={accNumber} setModifyExpData={setModifyExpData} setClickedOption={setClickedOption} setModifyCardData={setModifyCardData}/>;
+            return <OverviewEach accNumber={accNumber} setModifyExpData={setModifyExpData} setClickedOption={setClickedOption} setModifyCardData={setModifyCardData} showSidebar={prop.showSidebar} isSmallScreen={prop.isSmallScreen} date={date} setDate={setDate}/>;
           }
         
         break;

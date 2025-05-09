@@ -16,11 +16,11 @@ function OverviewEach(prop) {
   const { cardArr, setCardArr } = useAccountStore();
 // console.log(cardArr);
 
-  const t = new Date();
-const [date, setDate] = useState({
-        month: t.getMonth() + 1,
-        year: t.getFullYear()
-      })
+  // const t = new Date();
+// const [date, setDate] = useState({
+//         month: t.getMonth() + 1,
+//         year: t.getFullYear()
+//       })
       const [newBalance, setNewBalance] = useState(0)
 
   function handleModify() {
@@ -60,19 +60,21 @@ useEffect(() => {
     <h1>Account name: {cardArr.find(item => item.id === prop.accNumber)?.name}</h1>
     <h2>Total Balance: {newBalance}</h2>
     <Button onClick={handleModify}>Modify Account</Button>
-    <div className="firstRow">
-      <h1 >In the month of <DatePickerFunc dateAtAllAcc={setDate}/>
+    { !prop.isSmallScreen? null:
+<div className="firstRow">
+      <h1 >In the month of <DatePickerFunc dateAtAllAcc={prop.setDate}/>
 :  </h1>
 
       </div>
+}
     <div className="allAcc">
       
       
-      <CurrentMonth id={userID} date={date} accountID={prop.accNumber}/>  
+      <CurrentMonth id={userID} date={prop.date} accountID={prop.accNumber}/>  
       {/* {console.log("hey")  } */}
-      <CompareMonths id={userID} date={date} accountID={prop.accNumber}/>    
-        <RecentTransactions id={userID} date={date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} accountID={prop.accNumber}/>
-        <PieBreakDown id={userID} date={date} accountID={prop.accNumber}/>
+      <CompareMonths id={userID} date={prop.date} accountID={prop.accNumber}/>    
+        <RecentTransactions id={userID} date={prop.date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} accountID={prop.accNumber}/>
+        <PieBreakDown id={userID} date={prop.date} accountID={prop.accNumber}/>
       
     </div>
     
