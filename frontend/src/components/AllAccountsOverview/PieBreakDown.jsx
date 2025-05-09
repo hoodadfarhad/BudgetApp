@@ -53,15 +53,33 @@ useEffect (() => {
           const CatAmount = await res.json();
 
           
+          
           const parsed = CatAmount.map(item => ({
             ...item,
             sum: parseFloat(item.total)
           }))
 
-          setCategories(parsed);
+
+     let   accumulated =  parsed.reduce((acc, item) => acc + item.sum, 0)
+
+     const percent = parsed.map(item => ({
+      ...item,
+      sum: Math.round((parseFloat(item.total)/accumulated)*100)
+    }));
+
+     console.log(accumulated);
+      console.log(percent);
+      
+     
+     
+          
+          setCategories(percent);
+        
+          
     }
     
 catGetter();
+
 
 
 
@@ -101,7 +119,7 @@ catGetter();
             cx="50%"
             cy="50%"
             outerRadius={120}
-            label
+            label = {({ name, value }) => `${value}%`}
           >
             {categories.map((item, index) => (
               <Cell key={`slice-${index}`} fill={COLORS[index % COLORS.length]} />

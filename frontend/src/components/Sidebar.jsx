@@ -61,8 +61,9 @@ function Sidebar(prop) {
           {!prop.isSmallScreen && (
             <div className="firstRow">
                  
-            <h3 className="fs-4" >In the month of: <DatePickerFunc dateAtAllAcc={prop.setDate}/>
-        </h3>
+            <h3 className="fs-4" >In the month of: </h3>
+            <DatePickerFunc dateAtAllAcc={prop.setDate} />
+        
       
             </div>
           )}
@@ -82,7 +83,7 @@ function Sidebar(prop) {
 
         <li className="mb-1">
           <button
-            class="nav-link text-white btn-toggle rounded border-0 collapsed"
+            className="nav-link text-white btn-toggle rounded border-0 collapsed my-2 "
             onClick={() => {
               prop.optionSelector(0);
             }}
@@ -94,7 +95,7 @@ function Sidebar(prop) {
 
         <li>
           <button
-            className="nav-link text-white"
+            className="nav-link text-white mb-2"
             onClick={() => {
               prop.optionSelector(1);
             }}
@@ -116,7 +117,7 @@ function Sidebar(prop) {
             Accounts
           </button>
           <div class="collapse" id="home-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-3 small">
               <Cards cardSelector={prop.optionSelector} accNumber={prop.accNumber} setAccNumber={prop.setAccNumber} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} />
             </ul>
           </div>
