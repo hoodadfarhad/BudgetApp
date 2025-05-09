@@ -57,6 +57,35 @@ body {
 }
 
 
+.account-header {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  align-items: center;
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap; /* handles small screens */
+}
+
+.account-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-name {
+  font-size: 1.8rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.account-balance {
+  font-size: 1.3rem;
+  color: #3b9e7f;
+  margin-top: 0.3rem;
+}
 
 
 
@@ -83,6 +112,9 @@ height: 105vh;
 
 .overview {
   height: 90.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
  
 }
 

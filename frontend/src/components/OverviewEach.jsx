@@ -57,9 +57,15 @@ useEffect(() => {
 
   return (
     <div className="overview">
-    <h1>Account name: {cardArr.find(item => item.id === prop.accNumber)?.name}</h1>
-    <h2>Total Balance: {newBalance}</h2>
-    <Button onClick={handleModify}>Modify Account</Button>
+    <div className="account-header">
+  <div className="account-info">
+    <h2 className="account-name">{cardArr.find(item => item.id === prop.accNumber)?.name}</h2>
+    <p className="account-balance">Balance: ${newBalance}</p>
+  </div>
+  <Button variant="contained" color="primary" onClick={handleModify}>
+    ✏️ Modify
+  </Button>
+</div>
     { !prop.isSmallScreen? null:
 <div className="firstRow">
       <h1 >In the month of <DatePickerFunc dateAtAllAcc={prop.setDate}/>
