@@ -119,65 +119,76 @@ console.log("acc ID:" + prop.accNumber);
 
 
   return (
-    <div className="newCardInput">
-      <form className="form-width" onSubmit={newAccount}>
-        <div className="mb-3">
-          <label for="exampleFormControlInput1" className="form-label" >
-         { prop.modifyCardData.cardEditRequested  ? "Edit Account Name" : "Account Name"}
-          </label>
+    <div className="newCardInput d-flex justify-content-center align-items-center" style={{ minHeight: "80vh" }}>
+      <form className="p-4 shadow rounded-4 bg-white" style={{ width: "90%", maxWidth: "500px" }} onSubmit={newAccount}>
+        <h4 className="mb-4 text-center">
+          {prop.modifyCardData.cardEditRequested ? "Edit Account" : "Create New Account"}
+        </h4>
+  
+        <div className="form-floating mb-3">
           <input
             type="text"
             className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Example: Saving"
+            id="floatingAccountName"
+            placeholder="Saving"
             name="name"
             value={accountInfo.name}
             onChange={eventHandler}
             required
           />
-
-          <label for="exampleFormControlInput1" className="form-label">
-          { prop.modifyCardData.cardEditRequested  ? "Edit Bank Name" : "Bank Name"}
+          <label htmlFor="floatingAccountName">
+            {prop.modifyCardData.cardEditRequested ? "Edit Account Name" : "Account Name"}
           </label>
+        </div>
+  
+        <div className="form-floating mb-3">
           <input
             type="text"
             className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Example: TD"
+            id="floatingBankName"
+            placeholder="TD"
             name="bank"
             value={accountInfo.bank}
             onChange={eventHandler}
           />
-
-          <label for="exampleFormControlInput1" className="form-label">
-          { prop.modifyCardData.cardEditRequested  ? "New Account Balance" : "Balance"}
+          <label htmlFor="floatingBankName">
+            {prop.modifyCardData.cardEditRequested ? "Edit Bank Name" : "Bank Name"}
           </label>
+        </div>
+  
+        <div className="form-floating mb-4">
           <input
             type="number"
             min="0"
             step="0.01"
             className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Example: 1000.00"
+            id="floatingBalance"
+            placeholder="1000.00"
             name="balance"
             value={accountInfo.balance}
             onChange={eventHandler}
             required
           />
+          <label htmlFor="floatingBalance">
+            {prop.modifyCardData.cardEditRequested ? "New Account Balance" : "Balance"}
+          </label>
         </div>
-        <div class="col-auto">
-          <button type="submit" class="btn btn-primary mb-3">
-          { prop.modifyCardData.cardEditRequested  ? "Edit Account" : "Add Account"}
+  
+        <div className="d-flex flex-column gap-2">
+          <button type="submit" className="btn btn-primary w-100">
+            {prop.modifyCardData.cardEditRequested ? "Edit Account" : "Add Account"}
           </button>
-
-          { prop.modifyCardData.cardEditRequested  ? <button onClick={deleteAccount} className="btn btn-danger mb-3">
-            Delete Account
-          </button> : null}
-          
+  
+          {prop.modifyCardData.cardEditRequested && (
+            <button onClick={deleteAccount} type="button" className="btn btn-outline-danger w-100">
+              Delete Account
+            </button>
+          )}
         </div>
       </form>
     </div>
   );
+  
 }
 
 export default NewCardPanel;
