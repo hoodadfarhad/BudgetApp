@@ -5,6 +5,7 @@ import AddExpenses from "./AddExp";
 import Overview from "./AllAccounts";
 import NewCardPanel from "./NewCardPanel";
 import OverviewEach from "./OverviewEach";
+import Footer from "./Footer";
 
 import { Link } from "react-router-dom";
 
@@ -97,6 +98,7 @@ balance: "",
         <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} setDate={setDate} showSidebar={prop.showSidebar} setShowSidebar={prop.setShowSidebar} isSmallScreen={prop.isSmallScreen}/>
         {WhatToRender(clickedOption)}
       </div>
+      <Footer/>
     </div>
   );
 }

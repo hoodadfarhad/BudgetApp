@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
+import Footer from "./Footer";
 
 function About(prop) {
 
@@ -9,13 +10,22 @@ function About(prop) {
    const navigate = useNavigate();
  
   return (
-    <div>
+    <div className="position-relative">
       <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth}  showSidebar={prop.showSidebar} 
         setShowSidebar={prop.setShowSidebar} 
         isSmallScreen={prop.isSmallScreen} />
+  <div className="text-center mt-5">
       <h1>Hello World</h1>
-      {prop.isAuth? <h2>Good Job!</h2>:  <h2>This app helps you track your money like a boss — expenses, income, and all that good stuff 💸. Start logging in to start!</h2>
-      }
+      {prop.isAuth ? (
+        <h2 className="text-success">Good Job!</h2>
+      ) : (
+        <h2 className="text-muted px-3">
+          This app helps you track your money like a boss — expenses, income, and all that good stuff 💸. <br />
+          <span className="fw-semibold">Start logging in to start!</span>
+        </h2>
+      )}
+    </div>
+      
 {!prop.showSidebar && (
         <button
           onClick={() => prop.setShowSidebar(true)}
@@ -63,8 +73,8 @@ function About(prop) {
 
 <li className="mb-1">
             <button
-              class="nav-link text-white btn-toggle rounded border-0 collapsed"
-              onClick={() => {
+            className="btn btn-outline-light w-100 text-start mb-2"
+            onClick={() => {
                 prop.setShowSidebar(false);
                 navigate("/")
               }}
@@ -79,7 +89,8 @@ function About(prop) {
 
             <li className="mb-1">
             <button
-              class="nav-link text-white btn-toggle rounded border-0 collapsed"
+                         className="btn btn-outline-light w-100 text-start mb-2"
+
               onClick={() => {
                 console.log(prop.showSidebar);
                 prop.setShowSidebar(false);
@@ -93,8 +104,8 @@ function About(prop) {
 
           <li className="mb-1">
             <button
-              class="nav-link text-white btn-toggle rounded border-0 collapsed"
-              onClick={() => {
+            className="btn btn-outline-light w-100 text-start mb-2"
+            onClick={() => {
                 prop.setShowSidebar(false);
                 navigate("/contact")
               }}
@@ -127,6 +138,8 @@ function About(prop) {
     </div>)}
     </>
       )}
+
+      <Footer/>
     </div>
   );
 }

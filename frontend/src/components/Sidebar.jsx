@@ -83,7 +83,7 @@ function Sidebar(prop) {
 
         <li className="mb-1">
           <button
-            className="nav-link text-white btn-toggle rounded border-0 collapsed my-2 "
+            className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
               prop.optionSelector(0);
             }}
@@ -95,7 +95,7 @@ function Sidebar(prop) {
 
         <li>
           <button
-            className="nav-link text-white mb-2"
+            className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
               prop.optionSelector(1);
             }}
@@ -106,7 +106,7 @@ function Sidebar(prop) {
 
         <li class="mb-1">
           <button
-            class="nav-link text-white btn-toggle rounded border-0 collapsed"
+            className="btn btn-outline-light w-100 text-start mb-2"
             data-bs-toggle="collapse"
             data-bs-target="#home-collapse"
             aria-expanded="false"
@@ -127,8 +127,8 @@ function Sidebar(prop) {
         <>
             <li className="mb-1">
             <button
-              class="nav-link text-white btn-toggle rounded border-0 collapsed"
-              onClick={() => {
+            className="btn btn-outline-light w-100 text-start mb-2"
+            onClick={() => {
                 console.log(prop.showSidebar);
                 prop.setShowSidebar(false);
                navigate("/about")
@@ -141,8 +141,8 @@ function Sidebar(prop) {
 
           <li className="mb-1">
             <button
-              class="nav-link text-white btn-toggle rounded border-0 collapsed"
-              onClick={() => {
+            className="btn btn-outline-light w-100 text-start mb-2"
+            onClick={() => {
                 prop.setShowSidebar(false);
                 navigate("/contact")
               }}
