@@ -67,8 +67,8 @@ useEffect (() => {
       sum: Math.round((parseFloat(item.total)/accumulated)*100)
     }));
 
-     console.log(accumulated);
-      console.log(percent);
+    //  console.log(accumulated);
+    //   console.log(percent);
       
      
      

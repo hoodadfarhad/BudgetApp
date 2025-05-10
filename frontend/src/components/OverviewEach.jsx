@@ -51,6 +51,7 @@ useEffect(() => {
   }
 
   balanceCalc();
+  // console.log(prop.accNumber);
 }, [userID, prop.accNumber]);
 
 
@@ -74,6 +75,8 @@ useEffect(() => {
       </div>
 }
     <div className="allAcc">
+      
+      
       
       
       <CurrentMonth id={userID} date={prop.date} accountID={prop.accNumber}/>  

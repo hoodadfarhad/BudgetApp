@@ -44,6 +44,7 @@ function AllAccounts(prop) {
       </div>
 }
     <div className="allAcc">
+      
    
       
       <CurrentMonth id={userID} date={prop.date} />

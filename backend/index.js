@@ -113,6 +113,7 @@ app.post('/api/figureCalc', async (req, res) => {
   ) 
   
   //  console.log(sum.rows);
+  console.log(req.body.accountID);
   
   res.json(sum.rows);
 });
@@ -288,7 +289,9 @@ app.post('/api/getAllTransactions', async (req, res) => {
 
     const resultAddingAccount = await db.query(
       `INSERT INTO accounts (name, owner_id, balance)
-       VALUES ($1,$2, $3)`,
+       VALUES ($1,$2, $3)
+       ON CONFLICT (name, owner_id)
+DO UPDATE SET to_show = true;`,
       [req.body.info.bank + " " + req.body.info.name , req.body.owner_id, req.body.info.balance]
     );
 

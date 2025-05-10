@@ -57,7 +57,10 @@ useEffect(()=>{
  
 
   historyCalc();
+ 
   
+  
+  console.log(sums);
 
 
   
