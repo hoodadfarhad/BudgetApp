@@ -323,6 +323,8 @@ toggle-lable stack
                   className="form-check-input"
                   type="checkbox"
                   role="switch"
+                
+autoComplete="off"
                   id="flexSwitchCheckChecked"
                   checked={isIncome}
                   onChange={clickedIncome}
@@ -340,6 +342,8 @@ Fee amount
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="$Amount"
+                  autoFocus
+autoComplete="off"
                   min="0"
                   max="10000"
                   step="0.01"

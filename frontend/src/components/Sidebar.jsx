@@ -61,8 +61,8 @@ function Sidebar(prop) {
           {!prop.isSmallScreen && (
             <div className="firstRow">
                  
-            <h3 className="fs-4" >In the month of: </h3>
-            <DatePickerFunc dateAtAllAcc={prop.setDate} />
+            <h3 className="fs-4 mb-2" >In the month of: </h3>
+            <DatePickerFunc  dateAtAllAcc={prop.setDate} />
         
       
             </div>
@@ -81,7 +81,7 @@ function Sidebar(prop) {
       
 
 
-        <li className="mb-1">
+        <li className="mb-1 mt-3">
           <button
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {

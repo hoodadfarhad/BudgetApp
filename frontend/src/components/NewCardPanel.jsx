@@ -132,6 +132,8 @@ console.log("acc ID:" + prop.accNumber);
             id="floatingAccountName"
             placeholder="Saving"
             name="name"
+            autoFocus
+autoComplete="off"
             value={accountInfo.name}
             onChange={eventHandler}
             required
@@ -148,6 +150,8 @@ console.log("acc ID:" + prop.accNumber);
             id="floatingBankName"
             placeholder="TD"
             name="bank"
+        
+autoComplete="off"
             value={accountInfo.bank}
             onChange={eventHandler}
           />
@@ -165,6 +169,8 @@ console.log("acc ID:" + prop.accNumber);
             id="floatingBalance"
             placeholder="1000.00"
             name="balance"
+       
+autoComplete="off"
             value={accountInfo.balance}
             onChange={eventHandler}
             required
