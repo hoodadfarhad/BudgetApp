@@ -136,15 +136,40 @@ useEffect(() => {
   );
 })}
 
-        </tbody> : <tr>
-      <td colSpan={4} style={{ textAlign: "center" }}>
-        No transactions found.
-      </td>
-    </tr> }
+        </tbody> : 
+        
+        <tbody>
+  <tr>
+    <td colSpan={4} style={{backgroundColor: "transparent", border: "2px black solid"}}>
+      <div style={{ textAlign: "center", padding: "50px 0" }}>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: "50%",
+            border: "6px dashed #ccc",
+            margin: "0 auto 10px",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 30,
+            color: "#aaa"
+          }}
+        >
+          💰
+        </div>
+        <p style={{ margin: 0, fontSize: 18, color: "#555" }}>No transactions yet</p>
+        <p style={{ fontSize: 14, color: "#888" }}>Your transaction history will show up here</p>
+      </div>
+    </td>
+  </tr>
+</tbody>
+        
+        }
       
       </table>
 
-{history.length === 0 ? <p>no record</p>: <div className="d-flex justify-content-center align-items-center gap-3">
+{history.length === 0 ? null: <div className="d-flex justify-content-center align-items-center gap-3">
         <button
           className="btn btn-secondary"
           onClick={prevPg}

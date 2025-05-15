@@ -74,7 +74,7 @@ app.post('/api/setID', async (req, res) => {
   } else { // NEW USER
 
     appID = result.rows[0].APPID;
-console.log("EMAIL::: "+req.body.email);
+// console.log("EMAIL::: "+req.body.email);
 
 
    await db.query(
@@ -82,6 +82,14 @@ console.log("EMAIL::: "+req.body.email);
      VALUES ($1, $2, $3 , $4)`,
       [appID, req.body.fname, req.body.lname, req.body.email ]
     );
+
+await db.query(
+      `INSERT INTO categories (name, owner_id)
+       VALUES ($1,$2), ($3,$2), ($4,$2)`,
+      ['Rent',appID, 'Groceries', 'Utilities']
+    );
+
+
     
   }
   

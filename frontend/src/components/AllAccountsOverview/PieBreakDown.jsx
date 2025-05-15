@@ -103,7 +103,42 @@ catGetter();
 
 
 
-      {categories.length === 0 ? <h2 style={{marginTop: 60}}>No record found.</h2>: 
+      {categories.length === 0 ? 
+      
+      
+      
+      
+      
+      (
+        <div style={{ textAlign: "center", marginTop: 50 }}>
+          <div style={{
+            width: 220,
+            height: 220,
+            borderRadius: "50%",
+            border: "8px dashed #ccc",
+            margin: "0 auto",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            fontSize: 18,
+            color: "#888"
+          }}>
+      
+            <div>
+              <p style={{ margin: 0 }}>No data yet</p>
+              <p style={{ fontSize: 14, color: "#aaa" }}>Your pie chart will appear here!</p>
+            </div>
+          </div>
+        </div>
+      )
+      
+      
+      
+      
+      
+      
+      
+      : 
       
 
       <ResponsiveContainer  width= "100%" height={320} >
