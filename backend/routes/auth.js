@@ -16,9 +16,10 @@ router.get('/google/callback', passport.authenticate('google', {
 
 router.get('/infoGetter', (req, res) => {
   if (req.isAuthenticated()) {
+   console.log("salaam auth  :  "+req.user.email);
    
     
-    res.json({ userID: req.user.id, email: req.user.email, firstName: req.user.firstName, isAuthenticated: true });
+    res.json({ userID: req.user.id, email: req.user.email, firstName: req.user.firstName, lastName: req.user.lastName, isAuthenticated: true });
   } else {
     res.status(401).json({ userID: null, isAuthenticated: false  });
   }

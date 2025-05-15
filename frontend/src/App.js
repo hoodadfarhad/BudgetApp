@@ -14,6 +14,7 @@ const [isAuthenticated, setIsAuthenticated] = useState(false);
 const {userID, setUserID } = useUserStore();
 const [fetchedGoogleInfo, setFetchedGoogleInfo] = useState({
   fname: "",
+  lname: "",
   email: ""
 })
 
@@ -34,11 +35,12 @@ useEffect(() => {
     const userInfo = await res.json();
     setFetchedGoogleInfo({
       fname: userInfo.firstName,
+      lname: userInfo.lastName,
       email: userInfo.email
-    })
+    }) 
 
 
-    console.log("Fetched user info:", userInfo); 
+    console.log("Fetched user info at APP for email:", userInfo.email); 
 
 
 
@@ -48,7 +50,7 @@ useEffect(() => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",
-        body: JSON.stringify({ OAuthID: userInfo.userID }), 
+        body: JSON.stringify({ OAuthID: userInfo.userID, fname: userInfo.firstName, lname: userInfo.lastName, email:userInfo.email }), 
       });
 
       const { appID } = await idRes.json();

@@ -71,8 +71,18 @@ app.post('/api/setID', async (req, res) => {
       [req.body.OAuthID]
     );
     appID = existing.rows[0].APPID;
-  } else {
+  } else { // NEW USER
+
     appID = result.rows[0].APPID;
+console.log("EMAIL::: "+req.body.email);
+
+
+   await db.query(
+      `INSERT INTO "owners" (id, fname, lname, email)
+     VALUES ($1, $2, $3 , $4)`,
+      [appID, req.body.fname, req.body.lname, req.body.email ]
+    );
+    
   }
   
   res.json( {appID} );
