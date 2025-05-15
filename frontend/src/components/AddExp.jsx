@@ -6,6 +6,11 @@ import CategoryModal from "./CategoryModal";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
 import useAccountStore from './useAccountsStore';
 import useCardEditStore from "./useCardEditStore";
+import useReqFromAddEXP from "./useReqFromAddEXP";
+
+
+
+
 
 
  
@@ -16,6 +21,7 @@ function Expenses(prop) {
   const { setController } = useCardEditStore();
   const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const { cardArr } = useAccountStore();
+  const { setReqFromAddEXP } = useReqFromAddEXP();
 
   useEffect(() => {
     categoryGetter();
@@ -96,7 +102,7 @@ function resetModifyExpData() {
     if (currentMonth == month) {
       setDate(date);
     } else {
-      alert("Be advised that this does not belong to this month");
+     
       setDate(date);
     }
   }
@@ -151,6 +157,7 @@ function resetModifyExpData() {
   
       stateReset();
     }
+    prop.optionSelector(0);
   }
 
   async function handleSubmit(event) {
@@ -286,6 +293,7 @@ Drop Down for Accounts
                       className="dropdown-item"
                       onClick={() => {
                         setController(true);
+                        setReqFromAddEXP(true);
                         prop.optionSelector(3);
                       }}
                     >

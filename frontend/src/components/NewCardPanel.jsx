@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
 import useCardEditStore from "./useCardEditStore";
-
+import useReqFromAddEXP from "./useReqFromAddEXP";
 
 
 
@@ -13,7 +13,7 @@ function NewCardPanel(prop) {
     balance:""
   })
   const { controller, setController } = useCardEditStore();
-
+  const { reqFromAddEXP } = useReqFromAddEXP();
   const { userID, setUserID } = useUserStore();
 
 
@@ -41,7 +41,7 @@ function NewCardPanel(prop) {
     console.log(data);
 
   }
-    
+  prop.optionSelector(0);
   }
 
 
@@ -108,7 +108,11 @@ console.log("acc ID:" + prop.accNumber);
  }
 
 
-  
+  if (reqFromAddEXP) {
+    prop.optionSelector(1);
+  } else{
+    prop.optionSelector(0);
+  }
 
   
 

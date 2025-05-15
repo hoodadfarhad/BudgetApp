@@ -59,20 +59,20 @@ async  function handleRmvCategory(selectedItem) {
 
   return (
     <div
-      class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5"
+    className="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5 w-100 overflow-x-hidden"
       tabindex="-1"
       role="dialog"
       id="modalSheet"
     >
-      <div class="modal-dialog " role="document">
-        <div class="modal-content rounded-4 shadow modalPadding">
-          <div class="modal-header border-bottom-0 position-relative">
-            <h1 class="modal-title fs-5 text-center w-100">
+      <div className="modal-dialog w-100 modal-fullscreen-sm-down" role="document">
+        <div className="modal-content w-100 rounded-4 shadow modalPadding">
+          <div className="modal-header border-bottom-0 position-relative">
+            <h1 className="modal-title fs-5 text-center w-100">
               Customize Categories
             </h1>
             <button
               type="button"
-              class="btn-close position-absolute end-0 top-50 translate-middle-y"
+              className="btn-close position-absolute end-0 top-50 translate-middle-y"
               data-bs-dismiss="modal"
               aria-label="Close"
               onClick={() => {
@@ -83,11 +83,11 @@ async  function handleRmvCategory(selectedItem) {
 
           {prop.category.map((item) => {
             return (
-              <div class="modal-body py-0 mb-3 switchStack justify-content-between">
+              <div className="modal-body py-0 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
                 <h3>{item}</h3>
                 <button
                   type="button"
-                  class="btn btn-lg btn-danger"
+                  className="btn btn-lg btn-danger"
                   onClick={() => handleRmvCategory(item)}
                 >
                   Remove
@@ -95,11 +95,14 @@ async  function handleRmvCategory(selectedItem) {
               </div>
             );
           })}
-          <div class="modal-body py-0 mb-3 switchStack justify-content-between">
+         <div className="modal-body py-0 mb-3 d-flex flex-column flex-md-row justify-content-between align-items-center gap-2">
+
             <input
               type="text"
               name="newCategory"
-              className="form-control length"
+             
+              className="form-control flex-grow-1"
+
               placeholder="Add New Category"
               onChange={(event) => setNewCategory(event.target.value)}
             />

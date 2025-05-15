@@ -1,9 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import useCardEditStore from "./useCardEditStore";
+import useReqFromAddEXP from "./useReqFromAddEXP";
 
 function AddNewCard(prop) {
 
   const { setController } = useCardEditStore();
+
+  const { setReqFromAddEXP } = useReqFromAddEXP();
+ 
 
   // useEffect(() => {
   // function reqChanger() {
@@ -23,7 +27,7 @@ function AddNewCard(prop) {
           onClick={() => {
             
             setController(true); // so that its not a modify req, but its a create new req
-            
+            setReqFromAddEXP(false);
             prop.cardSelector(3);
             // console.log("hoyyyyyy "+ prop.modifyCardData.cardEditRequested);
             
