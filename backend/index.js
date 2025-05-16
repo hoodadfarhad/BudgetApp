@@ -56,6 +56,8 @@ app.post('/api/setID', async (req, res) => {
     return res.status(400).json({ error: "Missing OAuthID in request body" });
   }
 
+console.log("umad?"
+);
 
   const result = await db.query(
     `INSERT INTO "userID" ("OAuthID")
