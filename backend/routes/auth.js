@@ -10,7 +10,7 @@ router.get('/google', passport.authenticate('google', {
 
 router.get('/google/callback', passport.authenticate('google', {
   failureRedirect: '/login',
-  successRedirect: 'http://localhost:3000/'
+  successRedirect: process.env.CLIENT_ORIGIN
 }));
 
 
@@ -39,7 +39,7 @@ router.get('/logout', (req, res) => {
       }
 
       res.clearCookie('connect.sid'); // remove cookie from browser
-      res.redirect('http://localhost:3000/'); 
+      res.redirect(process.env.CLIENT_ORIGIN); 
     });
   });
 });
