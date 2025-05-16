@@ -538,5 +538,5 @@ WHERE id = $1 AND owner_id = $2;
 
 
 app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port: ${PORT}`);
   });
