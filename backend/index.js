@@ -66,7 +66,8 @@ console.log("umad?"
      RETURNING "APPID"`,
     [req.body.OAuthID]
   );
-  
+  console.log("reached here??"
+  );
   // If nothing was inserted
   let appID;
   if (result.rows.length === 0) {
