@@ -22,7 +22,7 @@ function Expenses(prop) {
   const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const { cardArr } = useAccountStore();
   const { setReqFromAddEXP } = useReqFromAddEXP();
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     categoryGetter();
 
@@ -118,7 +118,7 @@ function resetModifyExpData() {
   }
 
  async function categoryGetter(params) {
-  const res = await fetch("http://localhost:5001/api/getCategories", {
+  const res = await fetch(`${API_BASE}/api/getCategories`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id: userID}),
@@ -141,7 +141,7 @@ function resetModifyExpData() {
         };
         // console.log(" Sending userID:", transactionDataToSendBack.account);
   
-    const res = await fetch("http://localhost:5001/api/deleteTransaction", {
+    const res = await fetch(`${API_BASE}/api/deleteTransaction`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transactionDataToDelete),
@@ -178,7 +178,7 @@ function resetModifyExpData() {
       };
       // console.log(" Sending userID:", transactionDataToSendBack.account);
 
-  const res = await fetch("http://localhost:5001/api/AddUpdateTransaction", {
+  const res = await fetch(`${API_BASE}/api/AddUpdateTransaction`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(transactionDataToSendBack),

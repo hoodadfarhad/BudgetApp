@@ -15,7 +15,7 @@ function OverviewEach(prop) {
   const { userID } = useUserStore();
   const { cardArr, setCardArr } = useAccountStore();
 // console.log(cardArr);
-
+const API_BASE = process.env.REACT_APP_API_BASE;
   // const t = new Date();
 // const [date, setDate] = useState({
 //         month: t.getMonth() + 1,
@@ -38,7 +38,7 @@ function OverviewEach(prop) {
 useEffect(() => {
   // console.log(history);
   async function balanceCalc() {
-    const res = await fetch("http://localhost:5001/api/cardTransactions", {
+    const res = await fetch(`${API_BASE}/api/cardTransactions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: userID, accountID: prop.accNumber }),

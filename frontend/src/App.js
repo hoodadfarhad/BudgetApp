@@ -10,6 +10,8 @@ import StartingPage from "./components/StartingPage";
 
 export default function App() {
 
+  const API_BASE = process.env.REACT_APP_API_BASE;
+
 const [isAuthenticated, setIsAuthenticated] = useState(false);
 const {userID, setUserID } = useUserStore();
 const [fetchedGoogleInfo, setFetchedGoogleInfo] = useState({
@@ -28,7 +30,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
 
 useEffect(() => {
   async function authChecker() {
-    const res = await fetch("http://localhost:5001/auth/infoGetter", {
+    const res = await fetch(`${API_BASE}/auth/infoGetter`, {
       credentials: "include",
     });
 
@@ -46,7 +48,7 @@ useEffect(() => {
 
 
     if (userInfo.userID) {
-      const idRes = await fetch("http://localhost:5001/api/setID", {
+      const idRes = await fetch(`${API_BASE}/api/setID`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

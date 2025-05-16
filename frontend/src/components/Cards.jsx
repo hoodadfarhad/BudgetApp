@@ -7,11 +7,11 @@ import useAccountStore from './useAccountsStore';
 function Cards(prop) {
   const { userID, setUserID } = useUserStore();
   const { cardArr, setCardArr } = useAccountStore();
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     async function accountGetter() {
     
-        const res = await fetch("http://localhost:5001/api/accountsGetter", {
+        const res = await fetch(`${API_BASE}/api/accountsGetter`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ owner_id: userID }),

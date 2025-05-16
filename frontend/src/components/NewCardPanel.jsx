@@ -15,7 +15,7 @@ function NewCardPanel(prop) {
   const { controller, setController } = useCardEditStore();
   const { reqFromAddEXP } = useReqFromAddEXP();
   const { userID, setUserID } = useUserStore();
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
   function eventHandler(e) {
     
@@ -32,7 +32,7 @@ function NewCardPanel(prop) {
   if (confirmed) {
 
 
-    const res = await fetch ('http://localhost:5001/api/deleteAccountInfo', {
+    const res = await fetch (`${API_BASE}/api/deleteAccountInfo`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ owner_id: userID, accountID: prop.accNumber })
@@ -87,7 +87,7 @@ console.log("acc ID:" + prop.accNumber);
 
   console.log("New account from front:", accountInfo);
 
-  const res = await fetch ('http://localhost:5001/api/newAccountInfo', {
+  const res = await fetch (`${API_BASE}/api/newAccountInfo`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ info: accountInfo, owner_id: userID })
@@ -98,7 +98,7 @@ console.log("acc ID:" + prop.accNumber);
  else{
   // onSubmit tu halate edit update kon. jayi ke modifyCard tu db hast ro ba accountInfo update kon
   // cardArr.find(item => item.id === prop.accNumber)?.name
-  const res = await fetch ('http://localhost:5001/api/updateAccountInfo', {
+  const res = await fetch (`${API_BASE}/api/updateAccountInfo`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ info: accountInfo, owner_id: userID, accountID: prop.accNumber })

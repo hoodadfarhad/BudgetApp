@@ -34,7 +34,7 @@ function CompareMonths(prop) {
   ]);
   const [yAxis, setYAxis] = useState(5000);
   
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
 
 
@@ -50,7 +50,7 @@ useEffect(()=>{
   
 
   async function compareCalc() {
-    const res = await fetch("http://localhost:5001/api/compareMonthCalc", {
+    const res = await fetch(`${API_BASE}/api/compareMonthCalc`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: prop.id, date: prop.date,  accountID: prop.accountID }),

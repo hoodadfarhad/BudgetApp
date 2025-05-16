@@ -38,13 +38,16 @@ function PieBreakDown(prop) {
 const [categories, setCategories] = useState([
   ]);
 
+  const API_BASE = process.env.REACT_APP_API_BASE;
+
+
 useEffect (() => {
 
     async function catGetter(params) {
 
         
         
-        const res = await fetch("http://localhost:5001/api/getCatAmount", {
+        const res = await fetch(`${API_BASE}/api/getCatAmount`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ id: prop.id, date: prop.date,  accountID: prop.accountID }),

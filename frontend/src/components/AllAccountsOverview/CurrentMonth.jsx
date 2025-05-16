@@ -21,7 +21,7 @@ function CurrentMonth(prop) {
   const [sums, setSums] = useState({monthName: monthNameArr[ new Date().getMonth()] + new Date().getFullYear() ,  income: 0, expenses: 0 });
 
   // console.log(sums.m);
-  
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
   // console.log(monthName[sums.m-1]);
   
@@ -34,7 +34,7 @@ useEffect(()=>{
 
   async function historyCalc() {
   
-      const res = await fetch("http://localhost:5001/api/figureCalc", {
+      const res = await fetch(`${API_BASE}/api/figureCalc`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ id: prop.id, date: prop.date, accountID: prop.accountID }),

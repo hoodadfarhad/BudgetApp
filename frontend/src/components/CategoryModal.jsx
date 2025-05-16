@@ -5,14 +5,14 @@ function CategoryModal(prop) {
   const [newCategory, setNewCategory] = useState("");
   const [rmvCategory, setRmvCategory] = useState("");
   const { userID, setUserID } = useUserStore();
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
   
 
  async function handleAddCategory() {
     if (newCategory.trim() !== "") {
 
-      const res = await fetch("http://localhost:5001/api/addCategory", {
+      const res = await fetch(`${API_BASE}/api/addCategory`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newCategory.trim(), owner_id: userID })
@@ -35,7 +35,7 @@ function CategoryModal(prop) {
 async  function handleRmvCategory(selectedItem) {
 
 
-    const res = await fetch("http://localhost:5001/api/rmvCategory", {
+    const res = await fetch(`${API_BASE}/api/rmvCategory`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: selectedItem, owner_id: userID })

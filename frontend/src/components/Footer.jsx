@@ -1,9 +1,11 @@
 import React from "react";
 
 function Footer() {
+
+  const API_BASE = process.env.REACT_APP_API_BASE;
   const handleLogin = () => {
   
-    window.location.href = "http://localhost:5001/auth/google";
+    window.location.href = `${API_BASE}/auth/google`;
   };
 
   return (
