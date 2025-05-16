@@ -15,8 +15,10 @@ const app = express();
 const PORT = 5001;
 
 app.use(cors({
-  origin: process.env.CLIENT_ORIGIN,
-  credentials: true
+  origin: 'https://budgetapp.it.com',
+  credentials: true,
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
 }));
 
 app.use(express.json());
