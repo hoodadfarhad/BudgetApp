@@ -539,6 +539,10 @@ WHERE id = $1 AND owner_id = $2;
 
 
 
-app.listen(PORT, () => {
-    console.log(`Server running on port: ${PORT}`);
-  });
+// app.listen(PORT, () => {
+//     console.log(`Server running on port: ${PORT}`);
+//   });
+
+app.listen(5001, '0.0.0.0', () => {
+  console.log("Server running on port: 5001");
+});
