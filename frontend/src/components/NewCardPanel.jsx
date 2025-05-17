@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import useUserStore from './useUserStore'; // using Zustand here - global state access
 import useCardEditStore from "./useCardEditStore";
 import useReqFromAddEXP from "./useReqFromAddEXP";
-
+import useAccountStore from './useAccountsStore';
 
 
 
@@ -16,6 +16,7 @@ function NewCardPanel(prop) {
   const { reqFromAddEXP } = useReqFromAddEXP();
   const { userID, setUserID } = useUserStore();
   const API_BASE = process.env.REACT_APP_API_BASE;
+  const { fetchAccounts } = useAccountStore();
 
   function eventHandler(e) {
     
@@ -92,7 +93,9 @@ console.log("acc ID:" + prop.accNumber);
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ info: accountInfo, owner_id: userID })
   })
+  
   const data = await res.json();
+  await fetchAccounts(userID); 
   console.log(data);
  }
  else{

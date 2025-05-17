@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useCardEditStore from "./useCardEditStore";
 import useReqFromAddEXP from "./useReqFromAddEXP";
 
+
 function AddNewCard(prop) {
 
   const { setController } = useCardEditStore();

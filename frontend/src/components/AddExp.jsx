@@ -22,6 +22,7 @@ function Expenses(prop) {
   const [showDeleteBtn, setShowDeleteBtn] = useState(false);
   const { cardArr } = useAccountStore();
   const { setReqFromAddEXP } = useReqFromAddEXP();
+  const { fetchAccounts } = useAccountStore();
   const API_BASE = process.env.REACT_APP_API_BASE;
   useEffect(() => {
     categoryGetter();
@@ -268,6 +269,7 @@ Drop Down for Accounts
                   type="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
+                  onClick={() => fetchAccounts(userID)}
                 >
                   {state.name1}
                 </button>
@@ -304,6 +306,7 @@ Drop Down for Accounts
                 </div>
               </div>
             </div>
+
 
 
 
