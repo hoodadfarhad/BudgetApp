@@ -6,7 +6,7 @@ export function getGoogleStrategy() {
   return new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://api.budgetapp.it.com/auth/google/callback',
+    callbackURL: 'https://api.budgetapp.it.com/auth/google/callback',
   }, (accessToken, refreshToken, profile, done) => {
 
 
