@@ -23,7 +23,7 @@ function TableRecent(prop) {
 useEffect(() => {
   // console.log(history);
   async function transactionHistoryGetter() {
-    const res = await fetch(`${API_BASE}/api/getAllTransactions', {
+    const res = await fetch(`${API_BASE}/api/getAllTransactions`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: prop.id, date: prop.date, accountID: prop.accountID }),
