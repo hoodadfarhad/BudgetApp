@@ -15,7 +15,9 @@ const app = express();
 const PORT = 5001;
 
 app.use(cors({
-  origin: 'https://budgetapp.it.com',
+  origin: [
+    'http://localhost:3000', 
+     'https://budgetapp.it.com'],
   credentials: true,
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type']
@@ -32,7 +34,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/auth', authRoutes);
-
+const isProduction = process.env.NODE_ENV === 'production';
 
 
 const db = new pg.Client({
@@ -41,9 +43,8 @@ const db = new pg.Client({
   database: process.env.DB_NAME,
   password: process.env.DB_PASSWORD,
   port:5432,
-  ssl: {
-    rejectUnauthorized: false
-  }
+  ssl: isProduction ? { rejectUnauthorized: false } : false
+  
 })
 
 db.connect();
