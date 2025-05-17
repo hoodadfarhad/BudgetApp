@@ -38,7 +38,7 @@ setCardArr(cardInfo);
 
   return (
     <div>
-      <AddNewCard cardSelector={prop.cardSelector} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} />
+      <AddNewCard cardSelector={prop.cardSelector} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} setShowSidebar={prop.setShowSidebar} isSmallScreen={prop.isSmallScreen}/>
       {cardArr.map((inp, idx) => (
         <ExistingCard
           name={inp.name} 
@@ -48,6 +48,8 @@ setCardArr(cardInfo);
           setAccNumber={prop.setAccNumber}
           key={idx}
           cardsSelector={prop.cardSelector}
+          setShowSidebar={prop.setShowSidebar}
+          isSmallScreen={prop.isSmallScreen}
         />
       ))}
     </div>

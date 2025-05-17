@@ -34,6 +34,7 @@ useEffect(() => {
     setHistory(transactionHistory);
 
 
+
     // if (res.ok) {
     //   console.log("Transactions pulled!");
     // } else {
@@ -148,7 +149,7 @@ useEffect(() => {
             height: 100,
             borderRadius: "50%",
             border: "6px dashed #ccc",
-            margin: "0 auto 10px",
+         
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -158,7 +159,7 @@ useEffect(() => {
         >
           💰
         </div>
-        <p style={{ margin: 0, fontSize: 18, color: "#555" }}>No transactions yet</p>
+        <p style={{ fontSize: 18, color: "#555" }}>No transactions yet</p>
         <p style={{ fontSize: 14, color: "#888" }}>Your transaction history will show up here</p>
       </div>
     </td>

@@ -119,7 +119,8 @@ setYAxis(highestFinder(data));
   return (
     <div>
       <h2>Compare Months</h2>
-      <div  className="chart" style={{marginBottom:"45px"}}>
+      <div  className="chart">
+      <div className="chartContainer">
       <ResponsiveContainer width="100%" height= {320} >
         <LineChart data={data}>
           <CartesianGrid strokeDasharray="3 3" />
@@ -131,6 +132,7 @@ setYAxis(highestFinder(data));
           <Line type="monotone" dataKey="expenses" stroke="#ff6961" />
         </LineChart>
       </ResponsiveContainer>
+      </div>
       </div>
       </div>
   );

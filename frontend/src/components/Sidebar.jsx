@@ -82,9 +82,11 @@ function Sidebar(prop) {
 
 
         <li className="mb-1 mt-3">
+          
           <button
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
+              {isSmallScreen? prop.setShowSidebar(false) : null}
               prop.optionSelector(0);
             }}
           >
@@ -97,6 +99,7 @@ function Sidebar(prop) {
           <button
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
+              {prop.isSmallScreen? prop.setShowSidebar(false) : null}
               prop.optionSelector(1);
             }}
           >
@@ -118,7 +121,7 @@ function Sidebar(prop) {
           </button>
           <div class="collapse" id="home-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 ps-3 small">
-              <Cards cardSelector={prop.optionSelector} accNumber={prop.accNumber} setAccNumber={prop.setAccNumber} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} />
+              <Cards cardSelector={prop.optionSelector} accNumber={prop.accNumber} setAccNumber={prop.setAccNumber} isSmallScreen={prop.isSmallScreen} modifyCardData={prop.modifyCardData} setModifyCardData={prop.setModifyCardData} setShowSidebar={prop.setShowSidebar} />
             </ul>
           </div>
         </li>

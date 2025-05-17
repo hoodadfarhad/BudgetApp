@@ -73,8 +73,8 @@ useEffect(()=>{
       <h2>Total Spend</h2>
 
 
-      <div  className="chart" style={{marginBottom:"90px"}}>
-
+      <div  className="chart">
+      <div className="chartContainer">
       <ResponsiveContainer width="100%" height={320}>
      
         <BarChart data={[sums]}>
@@ -86,7 +86,9 @@ useEffect(()=>{
           <Bar dataKey="income" fill="#82ca9d" />
           <Bar dataKey="expenses" fill="#ff6961" />
         </BarChart>
+       
       </ResponsiveContainer>
+    </div>
     </div>
     </div>
   );

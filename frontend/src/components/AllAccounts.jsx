@@ -38,7 +38,7 @@ function AllAccounts(prop) {
 
     { isBigScreen? null:
 <div className="firstRow">
-      <h1 >In the month of <DatePickerFunc dateAtAllAcc={prop.setDate}/>
+      <h1 className="mb-5">In the month of <DatePickerFunc dateAtAllAcc={prop.setDate}/>
 :  </h1>
 
       </div>
@@ -46,10 +46,11 @@ function AllAccounts(prop) {
     <div className="allAcc">
       
    
-      
+
       <CurrentMonth id={userID} date={prop.date} />
       <CompareMonths id={userID} date={prop.date} />   
       <PieBreakDown id={userID} date={prop.date} /> 
+
         <RecentTransactions id={userID} date={prop.date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} />
        
       

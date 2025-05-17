@@ -12,6 +12,7 @@ function ExistingCard(prop) {
         class="link-body-emphasis d-inline-flex nav-link text-white rounded"
         onClick={() => {
         //  console.log(prop.cardID);
+        {prop.isSmallScreen? prop.setShowSidebar(false) : null}
          prop.setAccNumber(prop.cardID)
           prop.cardsSelector(prop.cardID);
         }}

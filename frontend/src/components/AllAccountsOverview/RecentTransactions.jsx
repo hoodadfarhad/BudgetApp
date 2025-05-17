@@ -4,7 +4,7 @@ import TableRecent from "../TableRecent";
 function RecentTransactions(prop) {
   return (
     <div>
-    <h2 style={{marginBottom:"-10px"}}>Recent Transactions</h2>
+    <h2>Recent Transactions</h2>
     <div className="recentTrans">
       
       <TableRecent id={prop.id} date={prop.date} setClickedOption={prop.setClickedOption} setModifyExpData={prop.setModifyExpData} accountID={prop.accountID} />

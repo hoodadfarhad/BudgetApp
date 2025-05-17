@@ -37,9 +37,7 @@ function PieBreakDown(prop) {
 
 const [categories, setCategories] = useState([
   ]);
-
   const API_BASE = process.env.REACT_APP_API_BASE;
-
 
 useEffect (() => {
 
@@ -100,26 +98,28 @@ catGetter();
 
 
     <div>
-      <h2 className="pieH2">Category BreakDown</h2>
-    <div className="chart" style={{marginBottom:"80px"}}>
+      <h2>Category BreakDown</h2>
+    <div className="chart">
 
-
+    <div className="chartContainer">
 
 
       {categories.length === 0 ? 
       
       
       
-      
+      <div className="chartContainer">
       
       (
-        <div style={{ textAlign: "center", marginTop: 50 }}>
+        <div style={{ textAlign: "center",  display: "flex",
+          alignItems: "center",
+          justifyContent: "center"}}>
+            
           <div style={{
             width: 220,
             height: 220,
             borderRadius: "50%",
             border: "8px dashed #ccc",
-            margin: "0 auto",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -128,13 +128,13 @@ catGetter();
           }}>
       
             <div>
-              <p style={{ margin: 0 }}>No data yet</p>
+              <p>No data yet</p>
               <p style={{ fontSize: 14, color: "#aaa" }}>Your pie chart will appear here!</p>
             </div>
           </div>
         </div>
       )
-      
+      </div>
       
       
       
@@ -143,7 +143,7 @@ catGetter();
       
       : 
       
-
+      <div className="chartContainer">
       <ResponsiveContainer  width= "100%" height={320} >
       
 
@@ -167,10 +167,13 @@ catGetter();
           <Legend />
         </PieChart>
       </ResponsiveContainer>
-     
-      } </div>  </div>
+     </div>
+      } 
+      </div> 
       
-    
+       </div>
+      
+    </div>
   );
 }
 

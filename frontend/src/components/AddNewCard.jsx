@@ -25,7 +25,7 @@ function AddNewCard(prop) {
         <a
           className="link-body-emphasis d-inline-flex nav-link text-white rounded"
           onClick={() => {
-            
+            {prop.isSmallScreen? prop.setShowSidebar(false) : null}
             setController(true); // so that its not a modify req, but its a create new req
             setReqFromAddEXP(false);
             prop.cardSelector(3);
