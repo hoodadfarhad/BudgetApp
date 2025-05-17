@@ -16,7 +16,7 @@ function TableRecent(prop) {
  
   const monthNameArr = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" ]
 
-
+  const API_BASE = process.env.REACT_APP_API_BASE;
 
 
 
