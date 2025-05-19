@@ -73,8 +73,8 @@ useEffect(()=>{
       <h2>Total Spend</h2>
 
 
-      <div  className="chart">
-      <div className="chartContainer">
+      <div className="chart d-flex flex-column align-items-center justify-content-center">
+      <div style={{ width: "100%", maxWidth: 400 }}>
       <ResponsiveContainer width="100%" height={320}>
      
         <BarChart data={[sums]}>

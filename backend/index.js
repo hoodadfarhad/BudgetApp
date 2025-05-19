@@ -14,14 +14,30 @@ dotenv.config();
 const app = express();
 const PORT = 5001;
 
-app.use(cors({
-  origin: [
-    'http://localhost:3000', 
-     'https://budgetapp.it.com'],
-  credentials: true,
-  methods: ['GET', 'POST', 'OPTIONS'],
-  allowedHeaders: ['Content-Type']
-}));
+
+
+
+
+const allowedOrigins = ['http://localhost:3000', 'https://budgetapp.it.com'];
+
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+
+    res.setHeader('Access-Control-Allow-Origin', origin);
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+  }
+
+  if (req.method === 'OPTIONS') {
+    return res.sendStatus(200); // Respond to preflight requests
+  }
+
+  next();
+});
+
 
 app.use(express.json());
 
@@ -60,8 +76,7 @@ app.post('/api/setID', async (req, res) => {
     return res.status(400).json({ error: "Missing OAuthID in request body" });
   }
 
-console.log("umad?"
-);
+
 
   const result = await db.query(
     `INSERT INTO "userID" ("OAuthID")
@@ -106,6 +121,11 @@ await db.query(
   
 });
 
+
+app.post('/auth/logout', (req, res) => {
+  res.clearCookie('connect.sid'); // remove session cookie from browser
+  res.status(200).json({ message: "Logged out " });
+});
 
 app.post('/api/figureCalc', async (req, res) => {
   

@@ -20,7 +20,7 @@ function Expenses(prop) {
   ]);
   const { setController } = useCardEditStore();
   const [showDeleteBtn, setShowDeleteBtn] = useState(false);
-  const { cardArr } = useAccountStore();
+  const { cardArr, setCardArr } = useAccountStore();
   const { setReqFromAddEXP } = useReqFromAddEXP();
   const { fetchAccounts } = useAccountStore();
   const API_BASE = process.env.REACT_APP_API_BASE;
@@ -277,7 +277,7 @@ Drop Down for Accounts
                 <ul className="dropdown-menu dropdown-menu-dark">
                   {cardArr.map((item, index) => {
                     return (
-                      
+                       
                       <DropDown
                         items={item.name}
                         key={index}
@@ -353,7 +353,7 @@ Fee amount
                   className="form-control"
                   id="exampleFormControlInput1"
                   placeholder="$Amount"
-                  autoFocus
+               
 autoComplete="off"
                   min="0"
                   max="10000"

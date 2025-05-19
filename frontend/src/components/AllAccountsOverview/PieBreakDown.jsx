@@ -99,18 +99,18 @@ catGetter();
 
     <div>
       <h2>Category BreakDown</h2>
-    <div className="chart">
+    <div className="chart chartContainer">
 
-    <div className="chartContainer">
+
 
 
       {categories.length === 0 ? 
       
       
       
-      <div className="chartContainer">
+      <div className=" d-flex flex-column align-items-center">
       
-      (
+      
         <div style={{ textAlign: "center",  display: "flex",
           alignItems: "center",
           justifyContent: "center"}}>
@@ -133,7 +133,7 @@ catGetter();
             </div>
           </div>
         </div>
-      )
+      
       </div>
       
       
@@ -143,7 +143,7 @@ catGetter();
       
       : 
       
-      <div className="chartContainer">
+      <div className=" chartContainer d-flex flex-column align-items-center">
       <ResponsiveContainer  width= "100%" height={320} >
       
 
@@ -156,7 +156,7 @@ catGetter();
             nameKey="category_name"
             cx="50%"
             cy="50%"
-            outerRadius={120}
+            outerRadius={100}
             label = {({ name, value }) => `${value}%`}
           >
             {categories.map((item, index) => (
@@ -169,7 +169,7 @@ catGetter();
       </ResponsiveContainer>
      </div>
       } 
-      </div> 
+   
       
        </div>
       

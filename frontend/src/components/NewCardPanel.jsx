@@ -139,7 +139,7 @@ console.log("acc ID:" + prop.accNumber);
             id="floatingAccountName"
             placeholder="Saving"
             name="name"
-            autoFocus
+           
 autoComplete="off"
             value={accountInfo.name}
             onChange={eventHandler}

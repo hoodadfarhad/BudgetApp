@@ -1,11 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 
 function Header(prop) {
 
-function logOutHandle(params) {
-  prop.setIsAuth(false);
-}
+  const navigate = useNavigate();
+
+   function logOutHandle() {
+  
+    prop.setIsAuth(false);   // proper session killing in next few updates hopefully )
+  }
+  
+  
 
 
 

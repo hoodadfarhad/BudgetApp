@@ -118,6 +118,12 @@ height: 105vh;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   padding: 1rem;
   transition: all 0.3s ease-in-out;
+ 
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    
+  
 }
 
 .chart h2 {
@@ -376,11 +382,10 @@ flex-direction: column;
 @media (max-width: 600px) {
   .chartContainer {
     height: 295px; /* slightly reduced on small screens */
+    
   }
 
-  .chart {
-    padding: 0.75rem;
-  }
+  
 
   .chart h2 {
     font-size: 1.1rem;
@@ -393,7 +398,12 @@ flex-direction: column;
    
   }
 
-
+  .chart {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* if vertical centering too */
+   
+  }
 
 
   .table-responsive.chart {

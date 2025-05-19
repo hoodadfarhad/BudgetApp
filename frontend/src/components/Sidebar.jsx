@@ -86,7 +86,7 @@ function Sidebar(prop) {
           <button
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
-              {isSmallScreen? prop.setShowSidebar(false) : null}
+              {prop.isSmallScreen? prop.setShowSidebar(false) : null}
               prop.optionSelector(0);
             }}
           >

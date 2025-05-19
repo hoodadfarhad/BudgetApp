@@ -25,9 +25,9 @@ function About(prop) {
          </p>
          <div className="row justify-content-center mt-4 text-start">
            <div className="col-md-8">
-             <ul className="list-group list-group-flush">
-               <li className="list-group-item">➕ Add and edit your <strong>expenses</strong> and <strong>income</strong></li>
-               <li className="list-group-item">📊 View your financial data in <strong>interactive charts</strong></li>
+             <ul className="list-group list-group-flush"> 
+               <li className="list-group-item">🧮 Add and edit your <strong>expenses</strong> and <strong>income</strong></li>
+               <li className="list-group-item">📊 View your financial data in <strong>interactive charts</strong></li> 
                <li className="list-group-item">🏦 Track spending and income per <strong>bank account</strong></li>
                <li className="list-group-item">📅 Compare <strong>monthly trends</strong> to improve budgeting</li>
                <li className="list-group-item">🧾 Get a clear summary of <strong>recent transactions</strong></li>
@@ -49,7 +49,7 @@ function About(prop) {
           <div className="col-md-8">
             <h4 className="fw-semibold mb-3">What you can do:</h4>
             <ul className="list-group list-group-flush">
-              <li className="list-group-item">➕ Add your income and spending, and watch the numbers work for you</li>
+              <li className="list-group-item">🧮 Add your income and spending, and watch the numbers work for you</li>
               <li className="list-group-item">📊 Visualize your data through simple, powerful charts</li>
               <li className="list-group-item">🏦 Keep tabs on each <strong>bank account</strong> separately</li>
               <li className="list-group-item">📅 Track your progress over time and compare months</li>

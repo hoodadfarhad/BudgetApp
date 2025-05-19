@@ -142,8 +142,8 @@ useEffect(() => {
         <tbody>
   <tr>
     <td colSpan={4} style={{backgroundColor: "transparent", border: "2px black solid"}}>
-      <div style={{ textAlign: "center", padding: "50px 0" }}>
-        <div
+      <div  className="d-flex flex-column align-items-center" style={{ textAlign: "center", padding: "50px 0" }}>
+        <div 
           style={{
             width: 100,
             height: 100,

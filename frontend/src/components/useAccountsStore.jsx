@@ -10,6 +10,15 @@ const useAccountStore = create((set) => ({
       body: JSON.stringify({ owner_id: userID }),
     });
     const data = await res.json();
+
+
+    data.existingAccounts.forEach((item) => {
+      console.log("accounts retreived in global state upon openning ADDEXP: "+ item.name);
+    });
+
+    
+    
+
     const cardInfo = data.existingAccounts.map((item) => ({
       name: item.name,
       id: item.id,
