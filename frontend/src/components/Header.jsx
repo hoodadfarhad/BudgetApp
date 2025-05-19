@@ -21,7 +21,6 @@ function Header(prop) {
     <div>
       <header className="p-3">
   <div className="header d-flex justify-content-between align-items-center px-3">
-
     {prop.isSmallScreen ? (
 
       <div className="d-flex justify-content-between align-items-center w-100">
