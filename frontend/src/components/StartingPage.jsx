@@ -95,7 +95,7 @@ balance: "",
       <Header googleInfo={prop.googleInfo} isAuth={prop.isAuth} setIsAuth={prop.setIsAuth} isSmallScreen={prop.isSmallScreen}/>
 
       <div className="mainPage">
-        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} setDate={setDate} showSidebar={prop.showSidebar} setShowSidebar={prop.setShowSidebar} isSmallScreen={prop.isSmallScreen}/>
+        <Sidebar optionSelector={SideBarResult} accNumber={accNumber} setAccNumber={setAccNumber} modifyCardData={modifyCardData} setModifyCardData={setModifyCardData} setDate={setDate} showSidebar={prop.showSidebar} setShowSidebar={prop.setShowSidebar} isSmallScreen={prop.isSmallScreen} isAuth ={prop.isAuthenticated}/>
         {WhatToRender(clickedOption)}
       </div>
       <Footer/>

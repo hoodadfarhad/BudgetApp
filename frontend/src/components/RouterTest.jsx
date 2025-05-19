@@ -33,7 +33,7 @@ function About(prop) {
                <li className="list-group-item">🧾 Get a clear summary of <strong>recent transactions</strong></li>
              </ul>
              <div className="text-center mb-3">
-             <button className="btn btn-outline-success mt-4 " onClick={() => navigate("/")}>
+             <button className="btn btn-outline-success mt-4 " onClick={() => navigate("/dashboard")}>
                Go to Dashboard
              </button>
              </div>
@@ -113,7 +113,7 @@ function About(prop) {
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
                 prop.setShowSidebar(false);
-                navigate("/")
+                navigate("/dashboard") ;
               }}
             >
               Dashboard
@@ -131,7 +131,7 @@ function About(prop) {
               onClick={() => {
                 console.log(prop.showSidebar);
                 prop.setShowSidebar(false);
-               navigate("/about")
+               navigate("/")
               }}
             >
               About

@@ -68,17 +68,8 @@ function Sidebar(prop) {
             </div>
           )}
 
-
-
-
-
-
-
  
       <ul className="nav nav-pills flex-column mb-auto">
-
-
-      
 
 
         <li className="mb-1 mt-3">
@@ -87,7 +78,7 @@ function Sidebar(prop) {
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
               {prop.isSmallScreen? prop.setShowSidebar(false) : null}
-              prop.optionSelector(0);
+             prop.optionSelector(0) 
             }}
           >
             Overview
@@ -132,9 +123,9 @@ function Sidebar(prop) {
             <button
             className="btn btn-outline-light w-100 text-start mb-2"
             onClick={() => {
-                console.log(prop.showSidebar);
+                // console.log(prop.showSidebar);
                 prop.setShowSidebar(false);
-               navigate("/about")
+               navigate("/")
               }}
             >
               About

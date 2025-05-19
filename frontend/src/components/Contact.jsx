@@ -61,29 +61,35 @@ function Contact(prop) {
         <hr />
 
         <ul className="nav nav-pills flex-column mb-auto">
-          <li className="mb-1">
+        <li className="mb-1">
             <button
-                        className="btn btn-outline-light w-100 text-start mb-2"
-              onClick={() => {
+            className="btn btn-outline-light w-100 text-start mb-2"
+            onClick={() => {
                 prop.setShowSidebar(false);
-                navigate("/");
+                navigate("/dashboard") ;
               }}
             >
-              Dashboard
+              {prop.isAuth? "Overview" : "Dashboard"}
             </button>
+  
           </li>
 
-          <li className="mb-1">
+
+
+
+            <li className="mb-1">
             <button
-                     className="btn btn-outline-light w-100 text-start mb-2"
+                         className="btn btn-outline-light w-100 text-start mb-2"
+
               onClick={() => {
                 console.log(prop.showSidebar);
                 prop.setShowSidebar(false);
-                navigate("/about");
+               navigate("/")
               }}
             >
               About
             </button>
+  
           </li>
 
           <li className="mb-1">

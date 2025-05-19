@@ -89,9 +89,9 @@ useEffect(() => {
     <div className="App">
       <Routes>
       <Route path="/contact" element={<Contact googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
-        <Route path="/about" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
-        <Route path="/" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}  /> : <About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
-        <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} />} />
+        <Route path="/" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
+        <Route path="/dashboard" element={isAuthenticated? <StartingPage googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}  /> : <Login setIsAuth = {setIsAuthenticated} isSmallScreen={isSmallScreen}/>} />
+        <Route path="/login" element={<Login setIsAuth = {setIsAuthenticated} isSmallScreen={isSmallScreen}/>} />
       </Routes>
     </div>
   );

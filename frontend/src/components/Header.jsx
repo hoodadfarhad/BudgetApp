@@ -45,8 +45,8 @@ function Header(prop) {
 
 <nav className="navbar navbar-expand-lg">
           <div className="navbar-nav d-flex flex-row gap-4">
-            <Link to="/" className="navbar-brand">Dashboard</Link>
-            <Link to="/about" className="nav-link">About</Link>
+            <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
+            <Link to="/" className="nav-link">About</Link>
             <Link to="/contact" className="nav-link">Contact</Link>
           </div>
         </nav>
