@@ -378,16 +378,16 @@ Calendar
 
 */} 
 
-              <div className="col-md-4">
-                <input
-                  type="date"
-                  name="transactionDate"
-                  className="form-control"
-                  value={date}
-                  onChange={(e) => selectedDate(e.target.value)}
-                  required
-                />
-              </div>
+<div className="input-group">
+  <span className="input-group-text"><i className="bi bi-calendar-event"></i></span>
+  <input
+    type="date"
+    className="form-control"
+    value={date}
+    onChange={(e) => selectedDate(e.target.value)}
+    required
+  />
+</div>
             </div>
 
             <div className="row rowMargin justify-content-around">
