@@ -31,7 +31,7 @@ let today = "";
     categoryGetter();
 
     
-    if (!prop.isSmallScreen) {
+    if (prop.isSmallScreen) {
        today = new Date().toLocaleDateString('en-CA');
     }
 
