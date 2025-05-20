@@ -24,8 +24,16 @@ function Expenses(prop) {
   const { setReqFromAddEXP } = useReqFromAddEXP();
   const { fetchAccounts } = useAccountStore();
   const API_BASE = process.env.REACT_APP_API_BASE;
+
+const today = "";
+
   useEffect(() => {
     categoryGetter();
+
+    
+    if (prop.isSmallScreen) {
+       today = new Date().toISOString().split('T')[0];
+    }
 
 
 if (prop.modifyExpData.transEditRequested === true) { 
@@ -56,7 +64,7 @@ return () =>{
     name2: "Category",
   });
   const [isIncome, setIsIncome] = useState(false);
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(today);
   const [showModal, setShowModal] = useState(false);
   const [fee, setFee] = useState("");
   const [description, setDescription] = useState("");
@@ -368,7 +376,7 @@ autoComplete="off"
 
 Calendar
 
-*/}
+*/} 
 
               <div className="col-md-4">
                 <input

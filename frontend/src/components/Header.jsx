@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-
+import logo from "../assets/logo-NoMotto.png";
 
 function Header(prop) {
 
@@ -27,12 +27,12 @@ function Header(prop) {
         {prop.isAuth ? (
           <>
             <h4 className="welcome m-0">Welcome {prop.googleInfo.fname}!</h4>
-            <button type="button" onClick={logOutHandle} className="btn btn-warning">
+            <button type="button" onClick={logOutHandle} className="btn my-custom-btn">
               <Link to="/" className="nav-link p-0 m-0">LogOut</Link>
             </button>
           </>
         ) : (
-          <button type="button" className="btn btn-warning ms-auto">
+          <button type="button" className="btn ms-auto my-custom-btn">
             <Link to="/login" className="nav-link p-0 m-0">Login</Link>
           </button>
         )}
@@ -44,6 +44,13 @@ function Header(prop) {
 
 <nav className="navbar navbar-expand-lg">
           <div className="navbar-nav d-flex flex-row gap-4">
+            
+    <img 
+      src={logo} 
+      alt="Logo" 
+      style={{ width: "70px", height: "40px", objectFit: "contain" }}
+      className="me-2"
+    />
             <Link to="/dashboard" className="navbar-brand">Dashboard</Link>
             <Link to="/" className="nav-link">About</Link>
             <Link to="/contact" className="nav-link">Contact</Link>

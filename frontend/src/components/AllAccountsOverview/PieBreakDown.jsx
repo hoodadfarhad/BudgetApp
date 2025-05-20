@@ -99,7 +99,7 @@ catGetter();
 
     <div>
       <h2>Category BreakDown</h2>
-    <div className="chart chartContainer">
+    <div className="chart ">
 
 
 
@@ -143,7 +143,7 @@ catGetter();
       
       : 
       
-      <div className=" chartContainer d-flex flex-column align-items-center">
+      <div className="chartContainer  d-flex flex-column align-items-center">
       <ResponsiveContainer  width= "100%" height={320} >
       
 

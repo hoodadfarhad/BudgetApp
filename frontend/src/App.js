@@ -87,6 +87,7 @@ useEffect(() => {
 
   return (
     <div className="App">
+      
       <Routes>
       <Route path="/contact" element={<Contact googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />
         <Route path="/" element={<About googleInfo={fetchedGoogleInfo} setIsAuth = {setIsAuthenticated} isAuth ={isAuthenticated} showSidebar={showSidebar} setShowSidebar={setShowSidebar} isSmallScreen={isSmallScreen} setIsSmallScreen={setIsSmallScreen}/>} />

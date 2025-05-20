@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Header from "./Header";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
+import logo from "../assets/logo-noBg.png";
+
 
 function About(prop) {
 
@@ -15,8 +17,9 @@ function About(prop) {
         setShowSidebar={prop.setShowSidebar} 
         isSmallScreen={prop.isSmallScreen} />
   <div className="text-center mt-5">
-  <div style={{ fontSize: "4rem" }}>💼</div> {/* Emoji logo */}
-      <h1>Track it. Stack it.</h1>
+  <img src={logo} alt="Logo" style={{ width: "350px", height: "250px", paddingBottom: "20px"
+   }} />
+ 
       {prop.isAuth ? (
          <>
          <h2 className="text-success">You're logged in 🎉</h2>
