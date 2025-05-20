@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0b336fab.css",
+    "main.js": "/static/js/main.c4d62959.js",
+    "static/media/bootstrap-icons.woff?": "/static/media/bootstrap-icons.39795c0b4513de014cf8.woff",
+    "static/media/bootstrap-icons.woff2?": "/static/media/bootstrap-icons.b7bcc075b395c14ce8c2.woff2",
+    "static/media/logo-NoMotto.png": "/static/media/logo-NoMotto.037df994c941187e72b2.png",
+    "static/media/logo-noBg.png": "/static/media/logo-noBg.d2a431065348855d5832.png",
+    "index.html": "/index.html",
+    "main.0b336fab.css.map": "/static/css/main.0b336fab.css.map",
+    "main.c4d62959.js.map": "/static/js/main.c4d62959.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0b336fab.css",
+    "static/js/main.c4d62959.js"
+  ]
+}
