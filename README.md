@@ -1,5 +1,8 @@
 # 💰 BudgetApp
 
+![Screenshot 2025-05-24 at 12 38 38 AM (2)](https://github.com/user-attachments/assets/75ef32e0-9db8-4565-a244-2091f0b69aab)
+
+
 **BudgetApp** is a full-stack personal finance platform that helps users track income and expenses, monitor account balances, and visualize financial trends over time. Built using React, Node.js, and PostgreSQL, and hosted on AWS, it provides a responsive and intuitive user experience for managing budgets with ease.
 
 ---
@@ -14,6 +17,17 @@
 - 🔐 Google OAuth-based **secure login**
 - 📊 All insights rendered through dynamic charts and tables
 - 📱 Mobile-friendly design using Bootstrap
+
+---
+
+![Screenshot 2025-05-24 at 12 41 41 AM (2)](https://github.com/user-attachments/assets/3060c6ae-b0e8-41d7-acbb-013a5cc449c1)
+
+![Screenshot 2025-05-24 at 12 42 00 AM (2)](https://github.com/user-attachments/assets/c13fca03-0900-4471-8889-d20a45f780de)
+
+![Screenshot 2025-05-24 at 12 42 25 AM (2)](https://github.com/user-attachments/assets/4050b721-0c6b-4ca4-9833-6860cc4b792b)
+
+
+
 
 ---
 
@@ -36,6 +50,7 @@
    ```bash
    git clone https://github.com/hoodadfarhad/BudgetApp.git
    cd BudgetApp
+   ```
 
 
 2. **Install backend dependencies**
@@ -43,20 +58,23 @@
    ```bash
    cd backend
    npm install
+   ```
 
 3. **Run the backend**
    
    ```bash
    node index.js
+   ```
 
-5. **Run the frontend**
+4. **Run the frontend**
   From the frontend directory:
 
     ```bash
     npm install
     npm start
+    ```
 
-4. **Set environment variables**
+5. **Set environment variables**
 Create a .env file in the backend directory with your credentials:
 
    ```bash
@@ -67,11 +85,12 @@ Create a .env file in the backend directory with your credentials:
     GOOGLE_CLIENT_ID=your-client-id
     GOOGLE_CLIENT_SECRET=your-client-secret
     SESSION_SECRET=some-random-string
+    ```
 
 
 ## 🔌 API Endpoints (Overview)
 
-This project uses 18 backend API routes, all using the POST and GET method.
+This project uses 18 backend API routes, all using both POST and GET methods.
 
 Sample routes:
 
@@ -121,7 +140,4 @@ If you'd like to contribute:
 - Push to the branch (git push origin feature/AmazingFeature)
 - Open a Pull Request
   
-## 📄 License
-
-
 Made with 💡 by Hoodad Farhad
