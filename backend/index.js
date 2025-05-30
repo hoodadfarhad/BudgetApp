@@ -166,7 +166,9 @@ app.post('/api/figureCalc', async (req, res) => {
   res.json(sum.rows);
 });
 
-
+app.get("/", (req, res) => {
+  res.send("API is live. This is for devops testing");
+});
 
 
 app.post('/api/compareMonthCalc', async (req, res) => {
